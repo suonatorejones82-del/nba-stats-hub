@@ -116,8 +116,16 @@ def box_entries(event_id):
 
 def main():
  
+    
     old = load()
-    indexed = {str(g['id']): g for g in old.get('games', []) if g.get('id') and START.isoformat() <= g.get('date', '') <= END.isoformat()
+    indexed = {
+        str(g['id']): g
+        for g in old.get('games', [])
+        if g.get('id')
+        and START.isoformat() <= g.get('date', '') <= END.isoformat()
+    }
+
+   
     boxes = {gid: entries for gid, entries in (old.get('boxscores') or {}).items() if gid in indexed}
     successes = 0
     # Non chiedere dati futuri troppo lontani: calendario fino a oggi + 7 giorni.
