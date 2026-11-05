@@ -123,9 +123,13 @@ def main():
     # Non chiedere dati futuri troppo lontani: calendario fino a oggi + 7 giorni.
     today = datetime.now(timezone.utc).date()
     until = min(END, today + timedelta(days=7))
-    for first, last in month_ranges(START, until):
-        dates = first.strftime('%Y%m%d') + '-' + last.strftime('%Y%m%d')
-        url = BASE + '/scoreboard?' + urllib.parse.urlencode({'dates': dates, 'limit': 500})
+    # ESPN accetta date singole YYYYMMDD; gli intervalli mensili danno HTTP 400.
+    # Dopo il primo import ricontrolla gli ultimi 10 giorni e i prossimi 7.
+    first_day = max(START, today - timedelta(days=10)) if indexed else START
+    current = first_day
+    while current <= until:
+        dates = current.strftime('%Y%m%d')
+        url = BASE + '/scoreboard?' + urllib.parse.urlencode({'dates': dates, 'limit': 100})
         try:
             data = fetch(url)
             events = data.get('events') or []
@@ -136,6 +140,7 @@ def main():
             successes += 1
         except Exception as exc:
             errors.append(f'Calendario {dates}: {str(exc)[:140]}')
+        current += timedelta(days=1)
         time.sleep(0.2)
 
     if successes == 0 or not indexed:
