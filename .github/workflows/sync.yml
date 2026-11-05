@@ -1,0 +1,35 @@
+
+name: Aggiorna statistiche NBA
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 12 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Installa Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Aggiorna statistiche
+        run: python sync.py
+
+      - name: Salva dati aggiornati
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/season.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Aggiornamento statistiche NBA"
+            git push
+          fi
