@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DEST = ROOT / 'data' / 'season.json'
 BASE = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba'
-START = date(2026, 10, 1)
+START = date(2026, 10, 20)
 END = date(2027, 6, 30)
 HEADERS = {'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'}
 
@@ -115,10 +115,8 @@ def box_entries(event_id):
 
 
 def main():
-    old = load()
-    indexed = {str(g['id']): g for g in old.get('games', []) if g.get('id')}
-    boxes = dict(old.get('boxscores') or {}) if isinstance(old.get('boxscores'), dict) else {}
-    errors = []
+    old = load()indexed = {str(g['id']): g for g in old.get('games', []) if g.get('id') and START.isoformat() <= g.get('date', '') <= END.isoformat()}
+    boxes = {gid: entries for gid, entries in (old.get('boxscores') or {}).items() if gid in indexed}
     successes = 0
     # Non chiedere dati futuri troppo lontani: calendario fino a oggi + 7 giorni.
     today = datetime.now(timezone.utc).date()
