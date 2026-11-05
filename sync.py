@@ -126,8 +126,9 @@ def main():
     }
 
    
-    boxes = {gid: entries for gid, entries in (old.get('boxscores') or {}).items() if gid in indexed}
-    successes = 0
+    
+    errors = []
+
     # Non chiedere dati futuri troppo lontani: calendario fino a oggi + 7 giorni.
     today = datetime.now(timezone.utc).date()
     until = min(END, today + timedelta(days=7))
