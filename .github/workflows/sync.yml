@@ -1,13 +1,22 @@
-
 name: Aggiorna statistiche NBA
 
 on:
   workflow_dispatch:
+    inputs:
+      rebuild:
+        description: 'Ricostruisci tutto archivio NBA'
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: '20 12 * * *'
 
 permissions:
   contents: write
+
+concurrency:
+  group: nba-stats-sync
+  cancel-in-progress: false
 
 jobs:
   aggiorna:
@@ -22,13 +31,19 @@ jobs:
           python-version: '3.11'
 
       - name: Aggiorna statistiche
-        run: python sync.py
+        run: |
+          if [ '${{ inputs.rebuild }}' = 'true' ]; then
+            python sync.py --rebuild
+          else
+            python sync.py
+          fi
+
       - name: Salva dati aggiornati
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/season.json
           if ! git diff --cached --quiet; then
-            git commit -m "Aggiornamento statistiche NBA"
+            git commit -m 'Aggiornamento statistiche NBA'
             git push
           fi
