@@ -1,6 +1,9 @@
-"""Aggiorna NBA Stats Hub 2026-27 con i dati ESPN (endpoint pubblici non ufficiali).
-Mantiene l'archivio precedente se il calendario non e' disponibile.
+"""Aggiorna NBA Stats Hub 2026-27 da ESPN (API pubbliche non ufficiali).
+
+Uso: python update_nba.py
+Per ricostruire tutti i box score: python update_nba.py --rebuild
 """
+import argparse
 import json
 import os
 import time
@@ -15,19 +18,27 @@ BASE = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba'
 START = date(2026, 10, 20)
 END = date(2027, 6, 30)
 HEADERS = {'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'}
+METRICS = ('pts', 'reb', 'ast', 'stl', 'blk')
 
 
 def fetch(url):
-    request = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(request, timeout=35) as response:
-        return json.load(response)
+    req = urllib.request.Request(url, headers=HEADERS)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=35) as response:
+                return json.load(response)
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(1.5 * (attempt + 1))
 
 
 def load():
     try:
-        return json.loads(DEST.read_text(encoding='utf-8'))
+        data = json.loads(DEST.read_text(encoding='utf-8'))
+        return data if isinstance(data, dict) else {}
     except (FileNotFoundError, ValueError):
-        return {'season': '2026-27', 'games': [], 'players': [], 'boxscores': []}
+        return {}
 
 
 def integer(value):
@@ -37,41 +48,20 @@ def integer(value):
         return 0
 
 
-def parse_date(value):
-    return str(value or '')[:10]
-
-
-def month_ranges(start, end):
-    current = start
-    while current <= end:
-        next_month = (current.replace(day=28) + timedelta(days=4)).replace(day=1)
-        last = min(end, next_month - timedelta(days=1))
-        yield current, last
-        current = last + timedelta(days=1)
-
-
 def parse_game(event):
     comp = (event.get('competitions') or [{}])[0]
-    sides = {}
-    for item in comp.get('competitors') or []:
-        side = item.get('homeAway')
-        if side in ('home', 'away'):
-            sides[side] = item
-    if 'home' not in sides or 'away' not in sides:
+    sides = {c.get('homeAway'): c for c in comp.get('competitors') or []}
+    if not sides.get('home') or not sides.get('away'):
         return None
     status = (event.get('status') or {}).get('type') or {}
     name = str(status.get('name') or '').lower()
     state = str(status.get('state') or '').lower()
-    if status.get('completed') or name in ('status_final', 'final'):
-        game_status = 'Final'
-    elif state == 'in':
-        game_status = 'Live'
-    else:
-        game_status = 'Scheduled'
+    game_status = ('Final' if status.get('completed') or name in ('status_final', 'final')
+                   else 'Live' if state == 'in' else 'Scheduled')
     home, away = sides['home'], sides['away']
     result = {
         'id': str(event.get('id') or ''),
-        'date': parse_date(event.get('date')),
+        'date': str(event.get('date') or '')[:10],
         'home': (home.get('team') or {}).get('abbreviation'),
         'away': (away.get('team') or {}).get('abbreviation'),
         'homeScore': integer(home.get('score')) if game_status == 'Final' else None,
@@ -81,25 +71,24 @@ def parse_game(event):
     return result if all(result[k] for k in ('id', 'date', 'home', 'away')) else None
 
 
-def box_entries(event_id):
-    url = BASE + '/summary?' + urllib.parse.urlencode({'event': event_id})
-    data = fetch(url)
-    result = []
-    for group in ((data.get('boxscore') or {}).get('players') or []):
+def box_entries(game):
+    data = fetch(BASE + '/summary?' + urllib.parse.urlencode({'event': game['id']}))
+    result, seen = [], set()
+    for group in (data.get('boxscore') or {}).get('players') or []:
         team = (group.get('team') or {}).get('abbreviation') or ''
+        if team not in (game['home'], game['away']):
+            continue
         for stat_group in group.get('statistics') or []:
-            labels = [str(x).upper() for x in (stat_group.get('labels') or [])]
+            labels = [str(x).upper() for x in stat_group.get('labels') or []]
             for athlete in stat_group.get('athletes') or []:
                 if athlete.get('didNotPlay') or athlete.get('inactive'):
                     continue
-                values = athlete.get('stats') or []
-                stats = dict(zip(labels, values))
-                if not stats:
-                    continue
+                stats = dict(zip(labels, athlete.get('stats') or []))
                 person = athlete.get('athlete') or {}
                 pid = str(person.get('id') or '')
-                if not pid:
+                if not pid or pid in seen or 'PTS' not in stats:
                     continue
+                seen.add(pid)
                 result.append({
                     'id': pid,
                     'name': person.get('displayName') or person.get('fullName') or pid,
@@ -111,39 +100,35 @@ def box_entries(event_id):
                     'blk': integer(stats.get('BLK')),
                     'min': stats.get('MIN') or '',
                 })
+    if len(result) < 10:
+        raise ValueError(f'Box score incompleto: {len(result)} giocatori')
     return result
 
 
 def main():
- 
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--rebuild', action='store_true', help='Riscarica tutti i box score')
+    args = parser.parse_args()
     old = load()
-    indexed = {
-        str(g['id']): g
-        for g in old.get('games', [])
-        if g.get('id')
-        and START.isoformat() <= g.get('date', '') <= END.isoformat()
-    }
-
-   
-    boxes = {gid: entries for gid, entries in (old.get('boxscores') or {}).items() if gid in indexed}
-    successes = 0
+    indexed = {str(g['id']): g for g in old.get('games', [])
+               if isinstance(g, dict) and g.get('id')
+               and START.isoformat() <= str(g.get('date', '')) <= END.isoformat()}
+    raw_boxes = old.get('boxscores') or {}
+    if not isinstance(raw_boxes, dict):
+        raw_boxes = {}
+    boxes = {} if args.rebuild else {str(k): v for k, v in raw_boxes.items()
+                                     if k in indexed and isinstance(v, list)}
     errors = []
-
-  
-    # Non chiedere dati futuri troppo lontani: calendario fino a oggi + 7 giorni.
     today = datetime.now(timezone.utc).date()
     until = min(END, today + timedelta(days=7))
-    # ESPN accetta date singole YYYYMMDD; gli intervalli mensili danno HTTP 400.
-    # Dopo il primo import ricontrolla gli ultimi 10 giorni e i prossimi 7.
-    first_day = max(START, today - timedelta(days=10)) if indexed else START
-    current = first_day
+    first = START if args.rebuild or not indexed else max(START, today - timedelta(days=10))
+    successes = 0
+    current = first
     while current <= until:
         dates = current.strftime('%Y%m%d')
         url = BASE + '/scoreboard?' + urllib.parse.urlencode({'dates': dates, 'limit': 100})
         try:
-            data = fetch(url)
-            events = data.get('events') or []
+            events = fetch(url).get('events') or []
             for event in events:
                 game = parse_game(event)
                 if game and START.isoformat() <= game['date'] <= END.isoformat():
@@ -152,50 +137,49 @@ def main():
         except Exception as exc:
             errors.append(f'Calendario {dates}: {str(exc)[:140]}')
         current += timedelta(days=1)
-        time.sleep(0.2)
+        time.sleep(0.15)
+    if not indexed or not successes:
+        raise RuntimeError('Calendario ESPN non disponibile: file precedente conservato. ' + str(errors[:2]))
 
-    if successes == 0 or not indexed:
-        raise RuntimeError('Calendario ESPN non disponibile: archivio originale conservato. ' + str(errors[:2]))
-
-    pending = [g for g in indexed.values() if g['status'] == 'Final' and g['id'] not in boxes]
-    for game in sorted(pending, key=lambda g: g['date'], reverse=True)[:35]:
+    final_ids = {gid for gid, g in indexed.items() if g['status'] == 'Final'}
+    boxes = {gid: entries for gid, entries in boxes.items() if gid in final_ids}
+    pending = [g for gid, g in indexed.items() if gid in final_ids and gid not in boxes]
+    pending.sort(key=lambda g: (g['date'], g['id']))
+    for game in pending:
         try:
-            entries = box_entries(game['id'])
-            if not entries:
-                raise ValueError('Nessuna statistica individuale nel box score')
-            boxes[game['id']] = entries
+            boxes[game['id']] = box_entries(game)
         except Exception as exc:
             errors.append(f"Box {game['id']}: {str(exc)[:110]}")
-        time.sleep(0.2)
+        time.sleep(0.15)
 
     players = {}
-    for gid, entries in boxes.items():
-        if gid not in indexed:
-            continue
-        for p in entries:
-            key = p['id']
-            if key not in players:
-                players[key] = {'id': key, 'name': p['name'], 'team': p['team'],
-                                'gp': 0, 'pts': 0, 'reb': 0, 'ast': 0, 'stl': 0, 'blk': 0}
-            total = players[key]
+    for gid in sorted(boxes, key=lambda k: (indexed[k]['date'], k)):
+        for p in boxes[gid]:
+            pid = str(p.get('id') or '')
+            if not pid:
+                continue
+            if pid not in players:
+                players[pid] = {'id': pid, 'name': p.get('name') or pid,
+                                'team': p.get('team') or '', 'gp': 0,
+                                **{m: 0 for m in METRICS}}
+            total = players[pid]
             total['gp'] += 1
-            for metric in ('pts', 'reb', 'ast', 'stl', 'blk'):
+            for metric in METRICS:
                 total[metric] += integer(p.get(metric))
-            total['team'] = p['team']
+            total['team'] = p.get('team') or total['team']
+            total['name'] = p.get('name') or total['name']
 
-    result = {
-        'season': '2026-27',
-        'updated': datetime.now(timezone.utc).isoformat(),
-        'games': sorted(indexed.values(), key=lambda g: (g['date'], g['id'])),
-        'players': list(players.values()),
-        'boxscores': boxes,
-        'errors': errors[:25],
-    }
+    result = {'season': '2026-27', 'updated': datetime.now(timezone.utc).isoformat(),
+              'games': sorted(indexed.values(), key=lambda g: (g['date'], g['id'])),
+              'players': list(players.values()), 'boxscores': boxes, 'errors': errors[:25]}
     DEST.parent.mkdir(parents=True, exist_ok=True)
     temp = DEST.with_suffix('.tmp')
     temp.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     os.replace(temp, DEST)
-    print(f"ESPN: {len(indexed)} partite, {len(boxes)} box score, {len(players)} giocatori; errori {len(errors)}")
+    print(f"ESPN: {len(indexed)} partite, {len(boxes)} box score, "
+          f"{len(players)} giocatori; errori {len(errors)}")
+    if errors:
+        print('Primi errori:', *errors[:3], sep='\n- ')
 
 
 if __name__ == '__main__':
