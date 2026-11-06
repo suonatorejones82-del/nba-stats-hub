@@ -1,7 +1,7 @@
 """Aggiorna NBA Stats Hub 2026-27 da ESPN (API pubbliche non ufficiali).
 
-Uso: python update_nba.py
-Per ricostruire tutti i box score: python update_nba.py --rebuild
+Uso: python sync.py
+Per ricostruire tutti i box score: python sync.py --rebuild
 """
 import argparse
 import json
@@ -48,6 +48,9 @@ def integer(value):
         return 0
 
 
+def normalize_team(team):
+    return {'GS': 'GSW', 'SA': 'SAS', 'NY': 'NYK'}.get(team, team)
+
 def parse_game(event):
     comp = (event.get('competitions') or [{}])[0]
     sides = {c.get('homeAway'): c for c in comp.get('competitors') or []}
@@ -62,8 +65,8 @@ def parse_game(event):
     result = {
         'id': str(event.get('id') or ''),
         'date': str(event.get('date') or '')[:10],
-        'home': (home.get('team') or {}).get('abbreviation'),
-        'away': (away.get('team') or {}).get('abbreviation'),
+        'home': normalize_team((home.get('team') or {}).get('abbreviation')),
+        'away': normalize_team((away.get('team') or {}).get('abbreviation')),
         'homeScore': integer(home.get('score')) if game_status == 'Final' else None,
         'awayScore': integer(away.get('score')) if game_status == 'Final' else None,
         'status': game_status,
@@ -75,7 +78,7 @@ def box_entries(game):
     data = fetch(BASE + '/summary?' + urllib.parse.urlencode({'event': game['id']}))
     result, seen = [], set()
     for group in (data.get('boxscore') or {}).get('players') or []:
-        team = (group.get('team') or {}).get('abbreviation') or ''
+        team = normalize_team((group.get('team') or {}).get('abbreviation') or '')
         if team not in (game['home'], game['away']):
             continue
         for stat_group in group.get('statistics') or []:
@@ -110,13 +113,13 @@ def main():
     parser.add_argument('--rebuild', action='store_true', help='Riscarica tutti i box score')
     args = parser.parse_args()
     old = load()
-    indexed = {str(g['id']): g for g in old.get('games', [])
+    indexed = {str(g['id']): {**g, 'home': normalize_team(g.get('home')), 'away': normalize_team(g.get('away'))} for g in old.get('games', [])
                if isinstance(g, dict) and g.get('id')
                and START.isoformat() <= str(g.get('date', '')) <= END.isoformat()}
     raw_boxes = old.get('boxscores') or {}
     if not isinstance(raw_boxes, dict):
         raw_boxes = {}
-    boxes = {} if args.rebuild else {str(k): v for k, v in raw_boxes.items()
+    boxes = {} if args.rebuild else {str(k): [{**p, 'team': normalize_team(p.get('team'))} for p in v if isinstance(p, dict)] for k, v in raw_boxes.items()
                                      if k in indexed and isinstance(v, list)}
     errors = []
     today = datetime.now(timezone.utc).date()
@@ -168,6 +171,9 @@ def main():
                 total[metric] += integer(p.get(metric))
             total['team'] = p.get('team') or total['team']
             total['name'] = p.get('name') or total['name']
+
+    if args.rebuild and errors:
+        raise RuntimeError(f'Ricostruzione incompleta ({len(errors)} errori): archivio precedente conservato. Esempi: {errors[:3]}')
 
     result = {'season': '2026-27', 'updated': datetime.now(timezone.utc).isoformat(),
               'games': sorted(indexed.values(), key=lambda g: (g['date'], g['id'])),
