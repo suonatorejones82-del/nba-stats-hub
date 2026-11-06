@@ -49,7 +49,7 @@ def integer(value):
 
 
 def normalize_team(team):
-    return {'GS': 'GSW', 'SA': 'SAS', 'NY': 'NYK'}.get(team, team)
+    return {'GS': 'GSW', 'SA': 'SAS', 'NY': 'NYK', 'WSH': 'WAS', 'UTAH': 'UTA', 'NO': 'NOP'}.get(team, team)
 
 def parse_game(event):
     comp = (event.get('competitions') or [{}])[0]
