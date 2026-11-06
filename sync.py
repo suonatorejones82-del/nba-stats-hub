@@ -19,6 +19,7 @@ START = date(2026, 10, 20)
 END = date(2027, 6, 30)
 HEADERS = {'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json'}
 METRICS = ('pts', 'reb', 'ast', 'stl', 'blk')
+EXTRA = ('fgm', 'fga', 'tpm', 'tpa', 'ftm', 'fta', 'tov', 'plusMinus', 'minutes')
 
 
 def fetch(url):
@@ -74,6 +75,29 @@ def parse_game(event):
     return result if all(result[k] for k in ('id', 'date', 'home', 'away')) else None
 
 
+def made_attempted(value):
+    try:
+        made, attempted = str(value).split('-', 1)
+        return int(made), int(attempted)
+    except (ValueError, TypeError, AttributeError):
+        return None, None
+
+
+def minutes_played(value):
+    try:
+        parts = str(value).split(':')
+        return int(parts[0]) + int(parts[1]) / 60 if len(parts) == 2 else float(parts[0])
+    except (ValueError, TypeError, IndexError):
+        return None
+
+
+def signed_number(value):
+    try:
+        return int(str(value).replace('−', '-'))
+    except (ValueError, TypeError):
+        return None
+
+
 def box_entries(game):
     data = fetch(BASE + '/summary?' + urllib.parse.urlencode({'event': game['id']}))
     result, seen = [], set()
@@ -92,9 +116,13 @@ def box_entries(game):
                 if not pid or pid in seen or 'PTS' not in stats:
                     continue
                 seen.add(pid)
+                fg = made_attempted(stats.get('FG'))
+                three = made_attempted(stats.get('3PT') or stats.get('3P'))
+                ft = made_attempted(stats.get('FT'))
                 result.append({
                     'id': pid,
                     'name': person.get('displayName') or person.get('fullName') or pid,
+                    'rookie': (person.get('experience', {}).get('years') == 0 if isinstance(person.get('experience'), dict) and isinstance(person['experience'].get('years'), int) else (person.get('experience') == 0 if isinstance(person.get('experience'), int) else None)),
                     'team': team,
                     'pts': integer(stats.get('PTS')),
                     'reb': integer(stats.get('REB')),
@@ -102,6 +130,12 @@ def box_entries(game):
                     'stl': integer(stats.get('STL')),
                     'blk': integer(stats.get('BLK')),
                     'min': stats.get('MIN') or '',
+                    'minutes': minutes_played(stats.get('MIN')),
+                    'fgm': fg[0], 'fga': fg[1],
+                    'tpm': three[0], 'tpa': three[1],
+                    'ftm': ft[0], 'fta': ft[1],
+                    'tov': integer(stats['TO']) if 'TO' in stats else (integer(stats['TOV']) if 'TOV' in stats else None),
+                    'plusMinus': signed_number(stats.get('+/-', stats.get('PLUSMINUS'))),
                 })
     if len(result) < 10:
         raise ValueError(f'Box score incompleto: {len(result)} giocatori')
@@ -163,14 +197,25 @@ def main():
                 continue
             if pid not in players:
                 players[pid] = {'id': pid, 'name': p.get('name') or pid,
-                                'team': p.get('team') or '', 'gp': 0,
-                                **{m: 0 for m in METRICS}}
+                                'team': p.get('team') or '', 'gp': 0, 'rookie': None,
+                                **{m: 0 for m in METRICS},
+                                **{m: 0 for m in EXTRA},
+                                **{m + 'Games': 0 for m in EXTRA}, 'td': 0}
             total = players[pid]
             total['gp'] += 1
             for metric in METRICS:
                 total[metric] += integer(p.get(metric))
+            for metric in EXTRA:
+                val = p.get(metric)
+                if val is not None:
+                    total[metric] += float(val)
+                    total[metric + 'Games'] += 1
+            if sum(integer(p.get(m)) >= 10 for m in ('pts', 'reb', 'ast', 'stl', 'blk')) >= 3:
+                total['td'] += 1
             total['team'] = p.get('team') or total['team']
             total['name'] = p.get('name') or total['name']
+            if p.get('rookie') is True: total['rookie'] = True
+            elif p.get('rookie') is False and total['rookie'] is None: total['rookie'] = False
 
     if args.rebuild and errors:
         raise RuntimeError(f'Ricostruzione incompleta ({len(errors)} errori): archivio precedente conservato. Esempi: {errors[:3]}')
