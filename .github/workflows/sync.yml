@@ -22,8 +22,7 @@ jobs:
           python-version: '3.11'
 
       - name: Aggiorna statistiche
-        run: python sync.py --rebuild
-
+        run: python sync.py
       - name: Salva dati aggiornati
         run: |
           git config user.name "github-actions[bot]"
