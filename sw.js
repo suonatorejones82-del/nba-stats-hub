@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v7-enhancements-20261107';
+const CACHE = 'nba-hub-v8-polish-20261107';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   self.skipWaiting();
