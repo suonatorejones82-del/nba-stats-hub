@@ -21,7 +21,7 @@ let players=state.players.filter(p=>(p.name||'').toLowerCase().includes(state.se
 let intro='';
 if(state.tab==='leaders'){
  const modes=[['three','Triple da 3'],['twoPct','Tiri da 2'],['ft','Tiri liberi']];
- const cfg={three:['three','tpa',20],twoPct:['twoPct','twoAtt',30],ft:['ft','fta',15]};
+ const cfg={three:['three','tpa',20],twoPct:['twoPct','twoAtt',30],ft:['ft','fta',20]};
  const [key,attempts,min]=cfg[state.leader];
  players=players.filter(p=>val(p,attempts)!==null&&val(p,attempts)>=min&&val(p,key)!==null);
  if(!cols.some(([k])=>k===state.leaderSort))state.leaderSort=key;

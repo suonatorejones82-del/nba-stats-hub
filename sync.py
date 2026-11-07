@@ -4,6 +4,7 @@ Uso: python sync.py
 Per ricostruire tutti i box score: python sync.py --rebuild
 """
 import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import os
 import time
@@ -98,6 +99,60 @@ def signed_number(value):
         return None
 
 
+def confirmed_experience(payload):
+    """Return rookie flag only when ESPN explicitly reports NBA experience years."""
+    if not isinstance(payload, dict):
+        return None
+    person = payload.get('athlete') if isinstance(payload.get('athlete'), dict) else payload
+    experience = person.get('experience')
+    if isinstance(experience, dict):
+        years = experience.get('years')
+    else:
+        years = experience
+    if isinstance(years, (int, float)) and not isinstance(years, bool) and years >= 0:
+        return years == 0
+    if isinstance(years, str) and years.strip().isdigit():
+        return int(years.strip()) == 0
+    return None
+
+
+def rookie_from_profile(pid):
+    url = BASE + '/athletes/' + urllib.parse.quote(str(pid), safe='')
+    try:
+        return confirmed_experience(fetch(url))
+    except Exception:
+        return None
+
+
+def resolve_rookies(players, old):
+    """Cache verified ESPN athlete experience; unknown stays unknown, never guessed."""
+    saved = old.get('rookieMetadata') or {}
+    if not isinstance(saved, dict):
+        saved = {}
+    known = {str(pid): flag for pid, flag in saved.items() if type(flag) is bool}
+    for player in players.values():
+        pid = str(player['id'])
+        if type(player.get('rookie')) is bool:
+            known[pid] = player['rookie']
+    missing = [pid for pid in players if pid not in known]
+    if missing:
+        print(f'Esperienza ESPN: verifico {len(missing)} schede giocatore (in parallelo)')
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            futures = {pool.submit(rookie_from_profile, pid): pid for pid in missing}
+            for future in as_completed(futures):
+                pid = futures[future]
+                try:
+                    flag = future.result()
+                except Exception:
+                    flag = None
+                if type(flag) is bool:
+                    known[pid] = flag
+    for pid, player in players.items():
+        player['rookie'] = known.get(pid)
+    print(f'Esperienza verificata: {sum(type(x) is bool for x in (p["rookie"] for p in players.values()))}/{len(players)}; rookie: {sum(p["rookie"] is True for p in players.values())}')
+    return known
+
+
 def box_entries(game):
     data = fetch(BASE + '/summary?' + urllib.parse.urlencode({'event': game['id']}))
     result, seen = [], set()
@@ -122,7 +177,7 @@ def box_entries(game):
                 result.append({
                     'id': pid,
                     'name': person.get('displayName') or person.get('fullName') or pid,
-                    'rookie': (person.get('experience', {}).get('years') == 0 if isinstance(person.get('experience'), dict) and isinstance(person['experience'].get('years'), int) else (person.get('experience') == 0 if isinstance(person.get('experience'), int) else None)),
+                    'rookie': confirmed_experience(person),
                     'team': team,
                     'pts': integer(stats.get('PTS')),
                     'reb': integer(stats.get('REB')),
@@ -217,12 +272,14 @@ def main():
             if p.get('rookie') is True: total['rookie'] = True
             elif p.get('rookie') is False and total['rookie'] is None: total['rookie'] = False
 
+    rookie_metadata = resolve_rookies(players, old)
+
     if args.rebuild and errors:
         raise RuntimeError(f'Ricostruzione incompleta ({len(errors)} errori): archivio precedente conservato. Esempi: {errors[:3]}')
 
     result = {'season': '2026-27', 'updated': datetime.now(timezone.utc).isoformat(),
               'games': sorted(indexed.values(), key=lambda g: (g['date'], g['id'])),
-              'players': list(players.values()), 'boxscores': boxes, 'errors': errors[:25]}
+              'players': list(players.values()), 'rookieMetadata': rookie_metadata, 'boxscores': boxes, 'errors': errors[:25]}
     DEST.parent.mkdir(parents=True, exist_ok=True)
     temp = DEST.with_suffix('.tmp')
     temp.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')

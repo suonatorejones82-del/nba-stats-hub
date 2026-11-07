@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v2-20261107';
+const CACHE = 'nba-hub-v3-rookie-ft-20261107';
 const ASSETS = ['./', './index.html', './style.css', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   self.skipWaiting();
