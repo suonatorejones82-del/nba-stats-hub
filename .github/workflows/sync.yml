@@ -9,7 +9,9 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: '20 12 * * *'
+    # 05:00 UTC in estate, 06:00 UTC in inverno
+    - cron: '0 5 * * *'
+    - cron: '0 6 * * *'
 
 permissions:
   contents: write
@@ -22,15 +24,30 @@ jobs:
   aggiorna:
     runs-on: ubuntu-latest
     steps:
+      - name: Verifica ora italiana (07:00)
+        id: ora
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" != 'schedule' ] || [ "$(TZ=Europe/Rome date +%H)" = '07' ]; then
+            echo 'execute=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'execute=false' >> "$GITHUB_OUTPUT"
+            echo 'Esecuzione saltata: non sono le 07 in Italia.'
+          fi
+
       - name: Scarica repository
+        if: steps.ora.outputs.execute == 'true'
         uses: actions/checkout@v4
 
       - name: Installa Python
+        if: steps.ora.outputs.execute == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Aggiorna statistiche
+        if: steps.ora.outputs.execute == 'true'
         run: |
           if [ '${{ inputs.rebuild }}' = 'true' ]; then
             python sync.py --rebuild
@@ -39,6 +56,7 @@ jobs:
           fi
 
       - name: Salva dati aggiornati
+        if: steps.ora.outputs.execute == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
