@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v4-legenda-20261107';
+const CACHE = 'nba-hub-v5-record-20261107';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   self.skipWaiting();
