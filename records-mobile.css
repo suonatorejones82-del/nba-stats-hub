@@ -1,0 +1,15 @@
+/* Record NBA: valori sempre visibili sugli schermi piccoli */
+.record-list{display:grid;gap:10px}
+.record-entry{padding:12px 13px}
+.record-main{display:flex;align-items:center;gap:10px;min-width:0}
+.record-rank{flex:0 0 20px;color:#aebbd1;font-weight:700;text-align:center}
+.record-person{display:flex;align-items:center;gap:9px;flex:1 1 auto;min-width:0}
+.record-person .player-photo{width:40px;height:40px;flex:0 0 40px;object-fit:cover;border-radius:50%}
+.record-identity{min-width:0;display:flex;flex-direction:column;gap:3px}
+.record-identity strong{font-size:14px;line-height:1.2;overflow-wrap:anywhere}
+.record-identity .muted{font-size:12px}
+.record-value{flex:0 0 65px;text-align:right;display:flex;flex-direction:column;gap:2px;align-items:flex-end}
+.record-value strong{font-size:25px;line-height:1;font-variant-numeric:tabular-nums;color:#ffad4e}
+.record-value span{font-size:11px;color:#aebbd1}
+.record-extra{display:flex;flex-wrap:wrap;gap:5px 15px;margin:10px 0 0 30px;padding-top:8px;border-top:1px solid rgba(148,163,184,.18);color:#aebbd1;font-size:12px}
+@media(min-width:760px){.record-list{grid-template-columns:repeat(2,minmax(0,1fr))}}

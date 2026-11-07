@@ -1,5 +1,5 @@
-const CACHE = 'nba-hub-v5-record-20261107';
-const ASSETS = ['./', './index.html', './style.css', './legend.css', './app.js', './manifest.webmanifest', './icon.svg'];
+const CACHE = 'nba-hub-v6-record-mobile-20261107';
+const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
