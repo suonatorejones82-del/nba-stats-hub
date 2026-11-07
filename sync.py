@@ -100,28 +100,47 @@ def signed_number(value):
 
 
 def confirmed_experience(payload):
-    """Return rookie flag only when ESPN explicitly reports NBA experience years."""
+    """Interpret explicit ESPN NBA experience, never infer from age or draft year."""
     if not isinstance(payload, dict):
         return None
-    person = payload.get('athlete') if isinstance(payload.get('athlete'), dict) else payload
-    experience = person.get('experience')
-    if isinstance(experience, dict):
-        years = experience.get('years')
-    else:
-        years = experience
-    if isinstance(years, (int, float)) and not isinstance(years, bool) and years >= 0:
-        return years == 0
-    if isinstance(years, str) and years.strip().isdigit():
-        return int(years.strip()) == 0
+    candidates = [payload]
+    for key in ('athlete', 'player'):
+        value = payload.get(key)
+        if isinstance(value, dict):
+            candidates.append(value)
+    for person in candidates:
+        experience = person.get('experience')
+        if isinstance(experience, dict):
+            years = experience.get('years')
+            if years is None:
+                years = experience.get('value')
+        else:
+            years = experience
+        if isinstance(years, bool) or years is None:
+            continue
+        if isinstance(years, (int, float)) and years >= 0 and float(years).is_integer():
+            return years == 0
+        if isinstance(years, str) and years.strip().isdigit():
+            return int(years.strip()) == 0
     return None
 
 
 def rookie_from_profile(pid):
-    url = BASE + '/athletes/' + urllib.parse.quote(str(pid), safe='')
-    try:
-        return confirmed_experience(fetch(url))
-    except Exception:
-        return None
+    """Try ESPN athlete profile variants; unknown remains None."""
+    safe_id = urllib.parse.quote(str(pid), safe='')
+    urls = (
+        'https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/' + safe_id,
+        BASE + '/athletes/' + safe_id,
+        'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/athletes/' + safe_id,
+    )
+    for url in urls:
+        try:
+            flag = confirmed_experience(fetch(url))
+            if flag is not None:
+                return flag
+        except Exception:
+            continue
+    return None
 
 
 def resolve_rookies(players, old):
