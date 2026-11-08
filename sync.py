@@ -232,7 +232,8 @@ def main():
     errors = []
     today = datetime.now(timezone.utc).date()
     until = min(END, today + timedelta(days=7))
-    first = START if args.rebuild or not indexed else max(START, today - timedelta(days=10))
+    # Ricontrolla l'intera stagione: recupera anche partite saltate oltre 10 giorni fa.
+    first = START
     successes = 0
     current = first
     while current <= until:
@@ -243,7 +244,10 @@ def main():
             for event in events:
                 game = parse_game(event)
                 if game and START.isoformat() <= game['date'] <= END.isoformat():
-                    indexed[game['id']] = game
+                    # Non retrocedere una partita già conclusa se ESPN risponde con dati temporaneamente obsoleti.
+                    previous = indexed.get(game['id'])
+                    if not (previous and previous.get('status') == 'Final' and game['status'] != 'Final'):
+                        indexed[game['id']] = game
             successes += 1
         except Exception as exc:
             errors.append(f'Calendario {dates}: {str(exc)[:140]}')
