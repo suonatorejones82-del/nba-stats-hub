@@ -1,11 +1,11 @@
 {
-  "name": "NBA Stats Hub 2026–2027",
+  "name": "NBA Stats Hub 2026-2027",
   "short_name": "NBA Stats",
-  "description": "Statistiche NBA 2026–27",
+  "description": "Statistiche NBA 2026-27",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#080e1b",
+  "background_color": "#080b1b",
   "theme_color": "#0b1221",
   "icons": [
     {
@@ -19,6 +19,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
