@@ -66,7 +66,8 @@ def parse_game(event):
     home, away = sides['home'], sides['away']
     result = {
         'id': str(event.get('id') or ''),
-        'date': str(event.get('date') or '')[:10],
+        'date': str(event.get('date') or comp.get('date') or '')[:10],
+        'startTime': str(event.get('date') or comp.get('date') or ''),
         'home': normalize_team((home.get('team') or {}).get('abbreviation')),
         'away': normalize_team((away.get('team') or {}).get('abbreviation')),
         'homeScore': integer(home.get('score')) if game_status == 'Final' else None,
@@ -251,6 +252,8 @@ def main():
                     # Non retrocedere una partita già conclusa se ESPN risponde con dati temporaneamente obsoleti.
                     previous = indexed.get(game['id'])
                     if not (previous and previous.get('status') == 'Final' and game['status'] != 'Final'):
+                        if previous and not game.get('startTime'):
+                            game['startTime'] = previous.get('startTime', '')
                         indexed[game['id']] = game
             successes += 1
         except Exception as exc:

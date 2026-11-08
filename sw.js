@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v9-slim-20261108';
+const CACHE = 'nba-hub-v10-orari-it-20261108';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   self.skipWaiting();
