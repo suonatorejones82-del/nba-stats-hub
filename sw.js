@@ -1,4 +1,4 @@
-const CACHE = 'nba-stats-hub-boxscore-20261108';
+const CACHE = 'nba-stats-hub-audit-20261108';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './manifest.webmanifest', './icon.svg'];
 self.addEventListener('install', event => {
   self.skipWaiting();

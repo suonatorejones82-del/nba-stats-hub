@@ -235,6 +235,8 @@ def main():
     # Ricontrolla l'intera stagione: recupera anche partite saltate oltre 10 giorni fa.
     first = START
     successes = 0
+    failed_dates = []
+    daily_event_ids = set()
     current = first
     while current <= until:
         dates = current.strftime('%Y%m%d')
@@ -243,6 +245,8 @@ def main():
             events = fetch(url).get('events') or []
             for event in events:
                 game = parse_game(event)
+                if game:
+                    daily_event_ids.add(game["id"])
                 if game and START.isoformat() <= game['date'] <= END.isoformat():
                     # Non retrocedere una partita già conclusa se ESPN risponde con dati temporaneamente obsoleti.
                     previous = indexed.get(game['id'])
@@ -250,6 +254,7 @@ def main():
                         indexed[game['id']] = game
             successes += 1
         except Exception as exc:
+            failed_dates.append(current.isoformat())
             errors.append(f'Calendario {dates}: {str(exc)[:140]}')
         current += timedelta(days=1)
         time.sleep(0.15)
@@ -300,7 +305,18 @@ def main():
     if args.rebuild and errors:
         raise RuntimeError(f'Ricostruzione incompleta ({len(errors)} errori): archivio precedente conservato. Esempi: {errors[:3]}')
 
-    result = {'season': '2026-27', 'updated': datetime.now(timezone.utc).isoformat(),
+    missing_boxes = [g for g in indexed.values() if g['status'] == 'Final' and g['id'] not in boxes]
+    # Controllo limitato ai calendari ESPN effettivamente scaricati; non prova la completezza di ESPN.
+    audit = {'checkedAt': datetime.now(timezone.utc).isoformat(),
+             'daysChecked': successes, 'daysFailed': failed_dates,
+             'calendarGamesSeen': len(daily_event_ids),
+             'finalGames': len(final_ids), 'boxscores': len(boxes),
+             'missingBoxscores': sorted([{'id': g['id'], 'date': g['date'],
+                                           'away': g['away'], 'home': g['home']}
+                                          for g in missing_boxes], key=lambda x: (x['date'], x['id']), reverse=True),
+             'note': 'Controllo dei calendari ESPN consultati e dei tabellini; non verifica partite assenti dalla fonte ESPN.'}
+    print(f"Controllo archivio: {successes} giorni letti, {len(failed_dates)} giorni non letti, {len(missing_boxes)} tabellini mancanti")
+    result = {'audit': audit, 'season': '2026-27', 'updated': datetime.now(timezone.utc).isoformat(),
               'games': sorted(indexed.values(), key=lambda g: (g['date'], g['id'])),
               'players': list(players.values()), 'rookieMetadata': rookie_metadata, 'boxscores': boxes, 'errors': errors[:25]}
     DEST.parent.mkdir(parents=True, exist_ok=True)
