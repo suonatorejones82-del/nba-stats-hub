@@ -9,7 +9,9 @@ on:
         type: boolean
         default: false
   schedule:
-    # 05:00 UTC in estate, 06:00 UTC in inverno
+    # 05 UTC = 07 italiane in estate; 06 UTC = 07 italiane in inverno.
+    # Il controllo sottostante evita la seconda esecuzione e tollera ritardi GitHub.
+    - cron: '0 5 * * *'
     - cron: '0 6 * * *'
 
 permissions:
@@ -23,27 +25,54 @@ jobs:
   aggiorna:
     runs-on: ubuntu-latest
     steps:
-      - name: Verifica ora italiana (07:00)
+      - name: Scarica repository
+        uses: actions/checkout@v4
+
+      - name: Verifica orario italiano e ultimo aggiornamento
         id: ora
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          if true; then
-            echo 'execute=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'execute=false' >> "$GITHUB_OUTPUT"
-            echo 'Esecuzione saltata: non sono le 07 in Italia.'
-          fi
-
-      - name: Scarica repository
-        if: steps.ora.outputs.execute == 'true'
-        uses: actions/checkout@v4
+          python3 - <<'PYCODE'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo('Europe/Rome'))
+          execute = True
+          reason = 'Avvio manuale'
+          if os.environ.get('EVENT_NAME') == 'schedule':
+              # GitHub Actions non garantisce l'avvio esatto al minuto.
+              if now.hour < 7:
+                  execute, reason = False, 'Prima delle 07:00 italiane'
+              else:
+                  try:
+                      data = json.loads(Path('data/season.json').read_text(encoding='utf-8'))
+                      stamp = data.get('updated', '')
+                      last = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+                      if last.astimezone(ZoneInfo('Europe/Rome')).date() == now.date():
+                          execute, reason = False, 'Archivio già aggiornato oggi'
+                      else:
+                          reason = 'Archivio da aggiornare'
+                  except (OSError, ValueError, TypeError, KeyError):
+                      reason = 'Data ultima sincronizzazione non leggibile: provo a sincronizzare'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              print('execute=' + str(execute).lower(), file=output)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              print(f'### Sincronizzazione NBA — {now:%d/%m/%Y %H:%M} (Italia)\n', file=summary)
+              print(('✅ Esecuzione prevista. ' if execute else '⏭️ Esecuzione saltata. ') + reason, file=summary)
+          print(f'Ora Italia: {now.isoformat()} | execute={execute} | {reason}')
+          PYCODE
 
       - name: Installa Python
         if: steps.ora.outputs.execute == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Memorizza riepilogo precedente
+        if: steps.ora.outputs.execute == 'true'
+        run: cp data/season.json /tmp/nba-season-before.json 2>/dev/null || true
 
       - name: Aggiorna statistiche
         if: steps.ora.outputs.execute == 'true'
@@ -53,6 +82,32 @@ jobs:
           else
             python sync.py
           fi
+
+      - name: Controlla differenze archivio
+        if: steps.ora.outputs.execute == 'true'
+        run: |
+          python3 - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          def read(path):
+              try: return json.loads(Path(path).read_text(encoding='utf-8'))
+              except (OSError, ValueError): return {}
+          old, new = read('/tmp/nba-season-before.json'), read('data/season.json')
+          def finals(data): return sum(g.get('status') == 'Final' for g in data.get('games', []))
+          previous, current = finals(old), finals(new)
+          pb, cb = len(old.get('boxscores', {})), len(new.get('boxscores', {}))
+          print(f'Partite finali: {previous} → {current}; tabellini: {pb} → {cb}')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              print(f'\n- Partite finali: **{previous} → {current}**', file=summary)
+              print(f'- Tabellini: **{pb} → {cb}**', file=summary)
+              print(f'- Errori segnalati dalla fonte: **{len(new.get("errors", []))}**', file=summary)
+              if previous == current and pb == cb:
+                  print('\n⚠️ Nessun nuovo risultato o tabellino: la sincronizzazione è riuscita, ma non sono stati rilevati nuovi finali.', file=summary)
+          if previous == current and pb == cb:
+              print('::warning::Sincronizzazione completata senza nuovi risultati o tabellini.')
+          if new.get('errors'):
+              print('::warning::La fonte ha segnalato errori: controllare il registro della sincronizzazione.')
+          PYCODE
 
       - name: Salva dati aggiornati
         if: steps.ora.outputs.execute == 'true'
