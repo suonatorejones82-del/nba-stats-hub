@@ -10,7 +10,6 @@ on:
         default: false
   schedule:
     # 05:00 UTC in estate, 06:00 UTC in inverno
-    - cron: '0 5 * * *'
     - cron: '0 6 * * *'
 
 permissions:
@@ -29,7 +28,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ "$EVENT_NAME" != 'schedule' ] || [ "$(TZ=Europe/Rome date +%H)" = '07' ]; then
+          if true; then
             echo 'execute=true' >> "$GITHUB_OUTPUT"
           else
             echo 'execute=false' >> "$GITHUB_OUTPUT"
