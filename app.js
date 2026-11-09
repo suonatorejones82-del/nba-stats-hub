@@ -61,6 +61,17 @@ if(state.tab==='rookies'){
  players=players.filter(p=>p.rookie===true);
  intro='<p class="muted">Solo rookie confermati dai dati ESPN. Se non sono disponibili informazioni affidabili sull’esperienza, non vengono classificati automaticamente.</p>';
 }
+if(state.tab==='leaders'){
+ const cat=state.leader,field=cat==='three'?'three':cat==='twoPct'?'twoPct':'ft';
+ const made=cat==='three'?'tpm':cat==='twoPct'?'twoMade':'ftm';
+ const attempts=cat==='three'?'tpa':cat==='twoPct'?'twoAtt':'fta';
+ players.sort((a,b)=>(val(b,field)??-Infinity)-(val(a,field)??-Infinity)||String(a.name).localeCompare(String(b.name)));
+ const photo=p=>`<img class="player-photo" src="https://a.espncdn.com/i/headshots/nba/players/full/${encodeURIComponent(p.id)}.png" alt="" loading="lazy" onerror="this.style.display='none'">`;
+ html=`${intro}<div class="card tablewrap"><table class="leader-simple"><thead><tr><th>#</th><th>Giocatore</th><th>Realizzati / Tentati</th><th>%</th></tr></thead><tbody>${players.map((p,i)=>`<tr><td>${i+1}</td><td><div class="player-name">${photo(p)}<div>${escapeHtml(p.name)}<div class="muted">${escapeHtml(p.team)}</div></div></div></td><td>${show(p,made)} / ${show(p,attempts)}</td><td><strong>${show(p,field)}</strong></td></tr>`).join('')}</tbody></table></div><p class="muted">Classifica ordinata per percentuale, con soglia minima di tentativi. Dati dall'archivio NBA Stats Hub.</p>`;
+ $('#content').innerHTML=html;
+ document.querySelectorAll('[data-leader]').forEach(b=>b.onclick=()=>{state.leader=b.dataset.leader;state.leaderSort=({three:'three',twoPct:'twoPct',ft:'ft'})[state.leader];render()});
+ return;
+}
 const activeSort=state.tab==='leaders'?state.leaderSort:state.sortKey;
 players.sort((a,b)=>(val(b,activeSort)??-Infinity)-(val(a,activeSort)??-Infinity)||String(a.name).localeCompare(String(b.name)));
 const photo=p=>`<img class="player-photo" src="https://a.espncdn.com/i/headshots/nba/players/full/${encodeURIComponent(p.id)}.png" alt="" loading="lazy" onerror="this.style.display='none'">`;
