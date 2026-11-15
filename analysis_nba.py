@@ -97,14 +97,14 @@ def main():
         stamp=datetime.fromisoformat(db['updated'].replace('Z','+00:00'))
         if now-stamp>timedelta(hours=36) or db.get('errors'): raise ValueError('Archivio obsoleto o incompleto')
         inj=injuries(); cs=candidates(db,now,inj); combos=combinations(cs); run.update(candidates=cs)
-        key=os.getenv('OPENAI_API_KEY'); model=(os.getenv('OPENAI_MODEL') or 'gpt-4.1-mini')
-        if combos and key:
-            prompt='Sei un revisore statistico NBA. Usa solo i dati forniti, nessuna quota. Le soglie sono riferimenti statistici, non linee di mercato. Valuta limiti del campione, minuti, assenze ESPN e matchup proxy. Non inventare dati. Scegli al massimo due combinazioni tra quelle numerate, oppure nessuna. Rispondi JSON con selected (array di indici da 0) e review (testo italiano breve). Non modificare soglie o punteggi.\n'+json.dumps({'candidates':cs,'combinations':combos},ensure_ascii=False)
-            resp=request('https://api.openai.com/v1/chat/completions',{'model':model,'messages':[{'role':'user','content':prompt}],'response_format':{'type':'json_object'},'max_completion_tokens':600},key)
-            review=json.loads(resp['choices'][0]['message']['content']); ids=review.get('selected',[])
-            if not isinstance(ids,list) or any(type(i)!=int or not 0<=i<len(combos) for i in ids): raise ValueError('Risposta AI non valida')
-            run.update(combinations=[combos[i] for i in dict.fromkeys(ids)][:2],review=str(review.get('review',''))[:1800],status='Revisione AI completata')
-        elif combos: run.update(status='Chiave API non configurata: revisione non eseguita')
+        if combos:
+            by_id={c['id']:c for c in cs}
+            ranked=sorted(combos,key=lambda group:(min(by_id[i]['score'] for i in group),s.mean(by_id[i]['score'] for i in group)),reverse=True)
+            chosen=[ranked[0]]
+            alternatives=[g for g in ranked[1:] if set(g)!=set(chosen[0])]
+            if alternatives:
+                chosen.append(max(alternatives,key=lambda g:(len(set(g)-set(chosen[0])),min(by_id[i]['score'] for i in g),s.mean(by_id[i]['score'] for i in g))))
+            run.update(combinations=chosen,review='Selezione automatica per solidità statistica e diversificazione. Soglie interne, non probabilità di vincita. Matchup basato sui totali avversari.',status='Analisi statistica completata')
     except Exception as e: run.update(status='Analisi non completata',review=type(e).__name__)
     out['runs'].append(run); save(out)
 if __name__=='__main__': main()
