@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v17-predictions-context';
+const CACHE = 'nba-hub-v19-predictions-clean';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './predictions.js', './menu.js', './menu.css', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   self.skipWaiting();
