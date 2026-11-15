@@ -10,10 +10,10 @@ def get(path):
     with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
 # Core request plus optional markets individually if provider rejects the combined request.
 from urllib.error import HTTPError
-try: events=get('odds?'+urllib.parse.urlencode({'markets':markets,'oddsFormat':'decimal'}))
+try: events=get('odds?'+urllib.parse.urlencode({'markets':markets,'bookmakers':'snai'}))
 except HTTPError as e:
     if e.code not in (400,422): raise
-    events=get('odds?'+urllib.parse.urlencode({'markets':'h2h,spreads,totals,player_points,player_rebounds,player_assists,player_threes','oddsFormat':'decimal'}))
+    events=get('odds?'+urllib.parse.urlencode({'markets':'h2h,spreads,totals,player_points,player_rebounds,player_assists,player_threes','bookmakers':'snai'}))
 if not isinstance(events,list): raise SystemExit('Formato quote inatteso')
 ids=get('ids'); cross={str(x['id']):x.get('espn_event_id') for x in ids if isinstance(x,dict) and 'id' in x} if isinstance(ids,list) else {}
 rows=[]
@@ -26,10 +26,10 @@ for e in events:
             outcomes=[]
             for o in m.get('outcomes',[]):
                 price=o.get('price')
-                if not isinstance(price,(int,float)) or not 1<price<1000:continue
+                if not isinstance(price,(int,float)) or abs(price)<100:continue
                 outcomes.append({k:o[k] for k in ('name','description','point','price') if k in o})
             if outcomes:ms.append({'key':m.get('key'),'outcomes':outcomes,'updated':m.get('last_update')})
         if ms:books.append({'key':b.get('key'),'title':b.get('title'),'markets':ms,'updated':b.get('last_update')})
     rows.append({'id':str(e.get('id')),'espn':e.get('espn_event_id') or cross.get(str(e.get('id'))),'home':e.get('home_team'),'away':e.get('away_team'),'start':e.get('commence_time'),'books':books})
-p=Path('data/odds.json');p.parent.mkdir(exist_ok=True);tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps({'updated':datetime.now(timezone.utc).isoformat(),'events':rows},ensure_ascii=False),encoding='utf-8');tmp.replace(p)
+p=Path('data/odds.json');p.parent.mkdir(exist_ok=True);tmp=p.with_suffix('.tmp');tmp.write_text(json.dumps({'updated':datetime.now(timezone.utc).isoformat(),'priceFormat':'american','events':rows},ensure_ascii=False),encoding='utf-8');tmp.replace(p)
 print(f'Eventi: {len(rows)}; bookmaker: {sorted({str(b["key"]) for e in rows for b in e["books"]})}')
