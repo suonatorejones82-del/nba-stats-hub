@@ -1,0 +1,31 @@
+name: Analisi NBA ore 19
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 17 * * *'
+    - cron: '0 18 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: nba-stats-sync
+  cancel-in-progress: false
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Analisi giornaliera
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL }}
+        run: |
+          if [ "${{ github.event_name }}" = schedule ] && [ "$(TZ=Europe/Rome date +%H)" -lt 19 ]; then exit 0; fi
+          python sync.py
+          python analysis_nba.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/season.json data/predictions.json
+          git diff --cached --quiet || (git commit -m 'Analisi statistica NBA' && git push)
