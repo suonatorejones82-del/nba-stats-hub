@@ -1,5 +1,5 @@
-const CACHE = 'nba-hub-v13-team-compare';
-const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './menu.js', './menu.css', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'nba-hub-v14-predictions';
+const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './predictions.js', './menu.js', './menu.css', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
