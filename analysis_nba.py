@@ -20,7 +20,7 @@ def settle(db,out):
             g=games.get(c['game']); rows=db['boxscores'].get(c['game'],[])
             if not g or g['status']!='Final' or not rows: continue
             p=next((p for p in rows if str(p['id'])==c['player']),None)
-            v=val(p,c['metric']) if p and p.get('minutes',0)>0 else None
+            v=val(p,c['metric']) if p and (p.get('minutes') or 0)>0 else None
             c['actual']=v; c['result']='non valutabile' if v is None else ('corretto' if (v>c['line'])==(c['side']=='Over') else 'errato')
 def request(url,body=None,key=None):
     headers={'User-Agent':'NBA Stats Hub','Accept':'application/json'}
@@ -33,78 +33,82 @@ def injuries():
         code=group.get('team',{}).get('abbreviation') or group.get('abbreviation'); code=aliases.get(code,code)
         if code and isinstance(group.get('injuries'),list): result[code]=group['injuries']
     return result
+# Fixed, interpretable thresholds; no search for an arbitrarily easy line.
+LINES={'Punti':[9.5,14.5,19.5,24.5,29.5], 'Rimbalzi':[3.5,5.5,7.5,9.5,11.5], 'Assist':[2.5,4.5,6.5,8.5,10.5], 'Triple':[0.5,1.5,2.5,3.5]}
 def candidates(db,now,inj):
     finals=sorted((g for g in db['games'] if g['status']=='Final' and g.get('startTime') and datetime.fromisoformat(g['startTime'].replace('Z','+00:00'))<now),key=lambda g:g['startTime']); boxes=db['boxscores']; result=[]
+    from collections import defaultdict
+    histories=defaultdict(list); totals={}
+    for f in finals:
+        rows=boxes.get(str(f['id']),[])
+        for r in rows:
+            if (r.get('minutes') or 0)>0: histories[str(r['id'])].append((f,r))
+        for t in (f['home'],f['away']):
+            rs=[r for r in rows if r['team']==t and (r.get('minutes') or 0)>0]
+            for m in LINES:
+                vs=[val(r,m) for r in rs]
+                if len(vs)>=5 and None not in vs: totals[(str(f['id']),t,m)]=sum(vs)
     for g in db['games']:
         if g['status']!='Scheduled' or not g.get('startTime'): continue
         start=datetime.fromisoformat(g['startTime'].replace('Z','+00:00'))
         if not now<start<=now+timedelta(hours=24): continue
         for team,opp in [(g['home'],g['away']),(g['away'],g['home'])]:
-            if team not in inj or opp not in inj: continue
-            flagged={str(r.get('athlete',{}).get('id')) for r in inj[team]}; names={r.get('athlete',{}).get('displayName') for r in inj[team]}
+            flagged={str(r.get('athlete',{}).get('id')) for r in inj.get(team,[])}; names={r.get('athlete',{}).get('displayName') for r in inj.get(team,[])}
+            teamgames=[f for f in finals if team in (f['home'],f['away'])]
             for p in db['players']:
                 if p['team']!=team or str(p['id']) in flagged or p['name'] in names: continue
-                hist=[r for f in finals for r in boxes.get(str(f['id']),[]) if str(r['id'])==str(p['id']) and r.get('minutes',0)>0]
-                if len(hist)<10 or any(r['team']!=team for r in hist[-5:]): continue
-                mins=[r['minutes'] for r in hist[-10:]]; minutes=s.mean(mins[-5:]);
-                if minutes<20 or s.stdev(mins)>7: continue
-                for metric in MET:
-                    vals=[val(r,metric) for r in hist];
+                hist=histories[str(p['id'])]; hist=[(f,r) for f,r in hist if r['team']==team]
+                if len(hist)<10 or len(teamgames)<10: continue
+                if str(hist[-1][0]['id'])!=str(teamgames[-1]['id']): continue
+                if len({str(f['id']) for f,r in hist[-10:]} & {str(f['id']) for f in teamgames[-10:]})<8: continue
+                mins=[r['minutes'] for f,r in hist[-10:]]; minutes=s.mean(mins[-5:]); spread=s.stdev(mins)
+                if minutes<22 or spread>7: continue
+                for metric,lines in LINES.items():
+                    vals=[val(r,metric) for f,r in hist];
                     if any(v is None for v in vals): continue
                     avg=s.mean(vals); a10=s.mean(vals[-10:]); a5=s.mean(vals[-5:]); sd=max(s.stdev(vals),1)
-                    # Fixed central reference, never lowered to fill a combination.
-                    line=0.5 if metric=='Doppia doppia' else math.floor(avg)+0.5
-                    for side in ['Over','Under']:
-                        sign=1 if side=='Over' else -1; hits=[(v>line) if sign==1 else (v<line) for v in vals]; rate=s.mean(hits); h10=sum(hits[-10:]); h5=sum(hits[-5:]);
-                        if rate<.65 or h10<7 or h5<3: continue
-                        # Opponent allowance: team totals proxy, not positional defense.
-                        def totals(f,t):
-                            rows=[r for r in boxes.get(str(f['id']),[]) if r['team']==t and r.get('minutes',0)>0]; vs=[val(r,metric) for r in rows]; return sum(vs) if vs and None not in vs else None
-                        allowed=[totals(f,f['away'] if f['home']==opp else f['home']) for f in finals if opp in (f['home'],f['away'])]; allowed=[v for v in allowed if v is not None]
-                        baseline=[totals(f,t) for f in finals for t in (f['home'],f['away'])]; baseline=[v for v in baseline if v is not None]
-                        if len(allowed)<5 or not baseline: continue
-                        clamp=lambda x:max(0,min(100,x)); margin=lambda x:clamp(50+25*sign*(x-line)/sd)
-                        matchup=clamp(50+sign*100*(s.mean(allowed)/max(s.mean(baseline),1)-1)); role=clamp(80-3*s.stdev(mins)); minute=clamp(50+sign*4*(minutes-s.mean([r['minutes'] for r in hist])))
-                        score=round(.15*margin(avg)+.20*margin(a10)+.15*margin(a5)+.20*(100*rate)+.10*minute+.10*matchup+.10*role)
-                        if score<65: continue
-                        result.append(dict(game=str(g['id']),start=g['startTime'],player=str(p['id']),name=p['name'],team=team,opponent=opp,metric=metric,line=line,side=side,score=score,avg=round(avg,2),avg10=round(a10,2),avg5=round(a5,2),hits10=h10,hits5=h5,hits=sum(hits),n=len(vals),minutes=round(minutes,1),matchup=round(matchup),result='in attesa'))
-    result.sort(key=lambda c:c['score'],reverse=True)
-    # One candidate per player, capped for API cost.
+                    # Nearest fixed reference to recent median, plus adjacent references within a bounded distance.
+                    center=s.median(vals[-10:]); nearest=min(lines,key=lambda l:abs(l-center)); allowed_lines=[l for l in lines if abs(l-center)<=max(abs(nearest-center),.75*sd) and abs(l-center)<=max(2,sd)]
+                    allowed=[totals.get((str(f['id']),f['away'] if f['home']==opp else f['home'],metric)) for f in finals if opp in (f['home'],f['away'])]; allowed=[v for v in allowed if v is not None]
+                    baseline=[v for (gid,t,m),v in totals.items() if m==metric]
+                    if len(allowed)<5 or not baseline: continue
+                    ratio=s.mean(allowed)/max(s.mean(baseline),1)
+                    for line in allowed_lines:
+                        for side,sign in [('Over',1),('Under',-1)]:
+                            hits=[sign*(v-line)>0 for v in vals]; rate=s.mean(hits); h10=sum(hits[-10:]); h5=sum(hits[-5:]);
+                            if rate<.65 or h10<7 or h5<4 or sign*(a5-line)<=0 or sign*(a10-line)<=0: continue
+                            if sign*(ratio-1)<-.15: continue
+                            score=round(.35*100*rate+.30*10*h10+.20*20*h5+.10*(100-5*spread)+.05*max(0,min(100,50+sign*100*(ratio-1))))
+                            result.append(dict(game=str(g['id']),start=g['startTime'],player=str(p['id']),name=p['name'],team=team,opponent=opp,metric=metric,line=line,side=side,score=score,avg=round(avg,2),avg10=round(a10,2),avg5=round(a5,2),hits10=h10,hits5=h5,hits=sum(hits),n=len(vals),minutes=round(minutes,1),matchup=round(ratio,2),availability='non segnalato nel report' if team in inj else 'da verificare',result='in attesa'))
+    result.sort(key=lambda c:(c['score'],c['hits10'],c['hits5']),reverse=True)
     unique=[]; seen=set()
     for c in result:
         if c['player'] not in seen: seen.add(c['player']); unique.append(c)
-    for i,c in enumerate(unique[:40]): c['id']=str(i+1)
-    return unique[:40]
+    for i,c in enumerate(unique): c['id']=str(i+1)
+    return unique
+
 def combinations(cs):
-    out=[]
-    for offset in range(min(4,len(cs))):
-        selected=[]; games=set()
-        for c in cs[offset:]+cs[:offset]:
-            if c['game'] in games: continue
-            selected.append(c['id']); games.add(c['game'])
-            if len(selected)==4: break
-        if len(selected)>=3 and set(selected) not in [set(x) for x in out]: out.append(selected)
-    return out
+    selected=[]; games=set()
+    for c in cs:
+        if c['availability']=='da verificare' or c['game'] in games: continue
+        selected.append(c['id']); games.add(c['game'])
+        if len(selected)==3: break
+    return [selected] if selected else []
 
 def main():
     import sys
     db=json.loads(D.read_text()); out=read(); settle(db,out); save(out)
     if '--settle' in sys.argv: return
     now=datetime.now(timezone.utc); day=now.astimezone(TZ).date().isoformat()
-    if any(r['day']==day for r in out['runs']): return
-    run={'day':day,'updated':now.isoformat(),'candidates':[],'combinations':[],'review':'','status':'Dati insufficienti'}
+    if any(r['day']==day and r.get('version')==2 for r in out['runs']) and '--force' not in sys.argv: return
+    run={'version':2,'day':day,'updated':now.isoformat(),'candidates':[],'combinations':[],'review':'','status':'Dati insufficienti'}
     try:
         stamp=datetime.fromisoformat(db['updated'].replace('Z','+00:00'))
         if now-stamp>timedelta(hours=36) or db.get('errors'): raise ValueError('Archivio obsoleto o incompleto')
-        inj=injuries(); cs=candidates(db,now,inj); combos=combinations(cs); run.update(candidates=cs)
-        if combos:
-            by_id={c['id']:c for c in cs}
-            ranked=sorted(combos,key=lambda group:(min(by_id[i]['score'] for i in group),s.mean(by_id[i]['score'] for i in group)),reverse=True)
-            chosen=[ranked[0]]
-            alternatives=[g for g in ranked[1:] if set(g)!=set(chosen[0])]
-            if alternatives:
-                chosen.append(max(alternatives,key=lambda g:(len(set(g)-set(chosen[0])),min(by_id[i]['score'] for i in g),s.mean(by_id[i]['score'] for i in g))))
-            run.update(combinations=chosen,review='Selezione automatica per solidità statistica e diversificazione. Soglie interne, non probabilità di vincita. Matchup basato sui totali avversari.',status='Analisi statistica completata')
+        try: inj=injuries()
+        except Exception: inj={}
+        cs=candidates(db,now,inj); combos=combinations(cs)
+        run.update(candidates=cs,combinations=combos,status='Analisi completata' if cs else 'Nessuna tendenza supera i filtri',review='Report assenze disponibile per '+str(len(inj))+' squadre; disponibilità non garantita.')
     except Exception as e: run.update(status='Analisi non completata',review=type(e).__name__)
     out['runs'].append(run); save(out)
 if __name__=='__main__': main()
