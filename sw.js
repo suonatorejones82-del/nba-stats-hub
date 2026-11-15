@@ -1,4 +1,4 @@
-const CACHE = 'nba-hub-v25-odds';
+const CACHE = 'nba-hub-v26-odds';
 const ASSETS = ['./', './index.html', './style.css', './legend.css', './records-mobile.css', './enhancements.css', './enhancements.js', './app.js', './predictions.js', './odds.js', './menu.js', './menu.css', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => {
   self.skipWaiting();
@@ -16,7 +16,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname.includes('/data/')) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+    event.respondWith(fetch(event.request,{cache:"no-store"}).catch(() => caches.match(event.request)));
     return;
   }
   event.respondWith(fetch(event.request).then(response => {
