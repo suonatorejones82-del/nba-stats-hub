@@ -21,7 +21,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = schedule ] && [ "$(TZ=Europe/Rome date +%H)" -lt 19 ]; then exit 0; fi
           python sync.py
-          python analysis_nba.py
+          if [ "${{ github.event_name }}" = workflow_dispatch ]; then python analysis_nba.py --force; else python analysis_nba.py; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/season.json data/predictions.json
