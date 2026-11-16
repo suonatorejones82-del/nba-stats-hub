@@ -34,8 +34,9 @@
           "minutes": 24.2,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "1"
+          "result": "corretto",
+          "id": "1",
+          "actual": 0
         },
         {
           "game": "401909991",
@@ -58,8 +59,9 @@
           "minutes": 36.0,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "2"
+          "result": "corretto",
+          "id": "2",
+          "actual": 19
         },
         {
           "game": "401909993",
@@ -82,8 +84,9 @@
           "minutes": 36.2,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "3"
+          "result": "non valutabile",
+          "id": "3",
+          "actual": null
         },
         {
           "game": "401909993",
@@ -106,8 +109,9 @@
           "minutes": 26.4,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "4"
+          "result": "corretto",
+          "id": "4",
+          "actual": 0
         },
         {
           "game": "401909993",
@@ -130,8 +134,9 @@
           "minutes": 37.8,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "5"
+          "result": "corretto",
+          "id": "5",
+          "actual": 3
         },
         {
           "game": "401909992",
@@ -154,8 +159,9 @@
           "minutes": 27.0,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "6"
+          "result": "errato",
+          "id": "6",
+          "actual": 2
         },
         {
           "game": "401909991",
@@ -178,8 +184,9 @@
           "minutes": 35.2,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "7"
+          "result": "errato",
+          "id": "7",
+          "actual": 3
         },
         {
           "game": "401909991",
@@ -202,8 +209,9 @@
           "minutes": 31.0,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "8"
+          "result": "non valutabile",
+          "id": "8",
+          "actual": null
         },
         {
           "game": "401909992",
@@ -226,8 +234,9 @@
           "minutes": 31.8,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "9"
+          "result": "errato",
+          "id": "9",
+          "actual": 3
         },
         {
           "game": "401909992",
@@ -250,8 +259,9 @@
           "minutes": 24.2,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "10"
+          "result": "errato",
+          "id": "10",
+          "actual": 0
         },
         {
           "game": "401909991",
@@ -274,8 +284,9 @@
           "minutes": 24.2,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "11"
+          "result": "corretto",
+          "id": "11",
+          "actual": 1
         },
         {
           "game": "401909991",
@@ -298,8 +309,9 @@
           "minutes": 35.2,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "12"
+          "result": "errato",
+          "id": "12",
+          "actual": 25
         },
         {
           "game": "401909993",
@@ -322,8 +334,9 @@
           "minutes": 32.6,
           "matchup": 1.06,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "13"
+          "result": "corretto",
+          "id": "13",
+          "actual": 37
         },
         {
           "game": "401909991",
@@ -346,8 +359,9 @@
           "minutes": 30.4,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "14"
+          "result": "corretto",
+          "id": "14",
+          "actual": 9
         },
         {
           "game": "401909991",
@@ -370,8 +384,9 @@
           "minutes": 28.6,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "15"
+          "result": "non valutabile",
+          "id": "15",
+          "actual": null
         },
         {
           "game": "401909993",
@@ -394,8 +409,9 @@
           "minutes": 24.8,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "16"
+          "result": "corretto",
+          "id": "16",
+          "actual": 0
         },
         {
           "game": "401909992",
@@ -418,8 +434,9 @@
           "minutes": 23.2,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "17"
+          "result": "non valutabile",
+          "id": "17",
+          "actual": null
         },
         {
           "game": "401909991",
@@ -442,8 +459,9 @@
           "minutes": 36.4,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "18"
+          "result": "corretto",
+          "id": "18",
+          "actual": 0
         },
         {
           "game": "401909991",
@@ -466,8 +484,9 @@
           "minutes": 34.2,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "19"
+          "result": "errato",
+          "id": "19",
+          "actual": 9
         },
         {
           "game": "401909992",
@@ -490,8 +509,9 @@
           "minutes": 33.4,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "20"
+          "result": "corretto",
+          "id": "20",
+          "actual": 0
         },
         {
           "game": "401909992",
@@ -514,8 +534,9 @@
           "minutes": 28.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "21"
+          "result": "corretto",
+          "id": "21",
+          "actual": 3
         },
         {
           "game": "401909993",
@@ -538,8 +559,9 @@
           "minutes": 29.0,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "22"
+          "result": "corretto",
+          "id": "22",
+          "actual": 1
         },
         {
           "game": "401909992",
@@ -562,8 +584,9 @@
           "minutes": 25.0,
           "matchup": 1.07,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "23"
+          "result": "errato",
+          "id": "23",
+          "actual": 2
         },
         {
           "game": "401909993",
@@ -586,8 +609,9 @@
           "minutes": 24.4,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "24"
+          "result": "corretto",
+          "id": "24",
+          "actual": 2
         },
         {
           "game": "401909993",
@@ -610,8 +634,9 @@
           "minutes": 32.8,
           "matchup": 1.11,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "25"
+          "result": "non valutabile",
+          "id": "25",
+          "actual": null
         },
         {
           "game": "401909992",
@@ -634,8 +659,9 @@
           "minutes": 32.8,
           "matchup": 1.04,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "26"
+          "result": "corretto",
+          "id": "26",
+          "actual": 5
         },
         {
           "game": "401909991",
@@ -658,8 +684,9 @@
           "minutes": 35.2,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "27"
+          "result": "errato",
+          "id": "27",
+          "actual": 14
         },
         {
           "game": "401909991",
@@ -682,8 +709,9 @@
           "minutes": 33.8,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "28"
+          "result": "corretto",
+          "id": "28",
+          "actual": 4
         },
         {
           "game": "401909992",
@@ -706,8 +734,9 @@
           "minutes": 26.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "29"
+          "result": "corretto",
+          "id": "29",
+          "actual": 2
         },
         {
           "game": "401909993",
@@ -730,8 +759,9 @@
           "minutes": 31.2,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "30"
+          "result": "corretto",
+          "id": "30",
+          "actual": 11
         }
       ],
       "combinations": [],
