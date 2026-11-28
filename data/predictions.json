@@ -13468,8 +13468,9 @@
           "minutes": 26.0,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "1"
+          "result": "corretto",
+          "id": "1",
+          "actual": 0
         },
         {
           "game": "401909331",
@@ -13492,8 +13493,9 @@
           "minutes": 29.6,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "2"
+          "result": "corretto",
+          "id": "2",
+          "actual": 0
         },
         {
           "game": "401909326",
@@ -13516,8 +13518,9 @@
           "minutes": 30.4,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "3"
+          "result": "errato",
+          "id": "3",
+          "actual": 7
         },
         {
           "game": "401909327",
@@ -13540,8 +13543,9 @@
           "minutes": 22.4,
           "matchup": 0.9,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "4"
+          "result": "corretto",
+          "id": "4",
+          "actual": 1
         },
         {
           "game": "401909332",
@@ -13564,8 +13568,9 @@
           "minutes": 26.2,
           "matchup": 0.97,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "5"
+          "result": "corretto",
+          "id": "5",
+          "actual": 0
         },
         {
           "game": "401909336",
@@ -13588,8 +13593,9 @@
           "minutes": 22.2,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "6"
+          "result": "corretto",
+          "id": "6",
+          "actual": 0
         },
         {
           "game": "401909329",
@@ -13612,8 +13618,9 @@
           "minutes": 24.8,
           "matchup": 1.1,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "7"
+          "result": "corretto",
+          "id": "7",
+          "actual": 0
         },
         {
           "game": "401909328",
@@ -13636,8 +13643,9 @@
           "minutes": 26.0,
           "matchup": 0.98,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "8"
+          "result": "corretto",
+          "id": "8",
+          "actual": 0
         },
         {
           "game": "401909335",
@@ -13660,8 +13668,9 @@
           "minutes": 22.8,
           "matchup": 1.04,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "9"
+          "result": "corretto",
+          "id": "9",
+          "actual": 2
         },
         {
           "game": "401909329",
@@ -13684,8 +13693,9 @@
           "minutes": 22.2,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "10"
+          "result": "corretto",
+          "id": "10",
+          "actual": 2
         },
         {
           "game": "401909334",
@@ -13708,8 +13718,9 @@
           "minutes": 33.8,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "11"
+          "result": "corretto",
+          "id": "11",
+          "actual": 25
         },
         {
           "game": "401909334",
@@ -13732,8 +13743,9 @@
           "minutes": 38.0,
           "matchup": 0.9,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "12"
+          "result": "corretto",
+          "id": "12",
+          "actual": 1
         },
         {
           "game": "401909330",
@@ -13756,8 +13768,9 @@
           "minutes": 23.4,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "13"
+          "result": "corretto",
+          "id": "13",
+          "actual": 0
         },
         {
           "game": "401909331",
@@ -13780,8 +13793,9 @@
           "minutes": 23.4,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "14"
+          "result": "corretto",
+          "id": "14",
+          "actual": 0
         },
         {
           "game": "401909330",
@@ -13804,8 +13818,9 @@
           "minutes": 34.0,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "15"
+          "result": "corretto",
+          "id": "15",
+          "actual": 9
         },
         {
           "game": "401909334",
@@ -13828,8 +13843,9 @@
           "minutes": 22.4,
           "matchup": 1.08,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "16"
+          "result": "corretto",
+          "id": "16",
+          "actual": 1
         },
         {
           "game": "401909327",
@@ -13852,8 +13868,9 @@
           "minutes": 24.2,
           "matchup": 1.09,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "17"
+          "result": "errato",
+          "id": "17",
+          "actual": 2
         },
         {
           "game": "401909331",
@@ -13876,8 +13893,9 @@
           "minutes": 34.0,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "18"
+          "result": "corretto",
+          "id": "18",
+          "actual": 4
         },
         {
           "game": "401909327",
@@ -13900,8 +13918,9 @@
           "minutes": 26.0,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "19"
+          "result": "corretto",
+          "id": "19",
+          "actual": 1
         },
         {
           "game": "401909330",
@@ -13924,8 +13943,9 @@
           "minutes": 35.6,
           "matchup": 1.0,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "20"
+          "result": "corretto",
+          "id": "20",
+          "actual": 20
         },
         {
           "game": "401909332",
@@ -13948,8 +13968,9 @@
           "minutes": 25.8,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "21"
+          "result": "corretto",
+          "id": "21",
+          "actual": 0
         },
         {
           "game": "401909332",
@@ -13972,8 +13993,9 @@
           "minutes": 24.6,
           "matchup": 0.98,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "22"
+          "result": "corretto",
+          "id": "22",
+          "actual": 1
         },
         {
           "game": "401909335",
@@ -13996,8 +14018,9 @@
           "minutes": 32.0,
           "matchup": 1.08,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "23"
+          "result": "errato",
+          "id": "23",
+          "actual": 9
         },
         {
           "game": "401909335",
@@ -14020,8 +14043,9 @@
           "minutes": 22.8,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "24"
+          "result": "corretto",
+          "id": "24",
+          "actual": 8
         },
         {
           "game": "401909336",
@@ -14044,8 +14068,9 @@
           "minutes": 32.2,
           "matchup": 0.97,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "25"
+          "result": "corretto",
+          "id": "25",
+          "actual": 18
         },
         {
           "game": "401909331",
@@ -14068,8 +14093,9 @@
           "minutes": 26.2,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "26"
+          "result": "corretto",
+          "id": "26",
+          "actual": 4
         },
         {
           "game": "401909335",
@@ -14092,8 +14118,9 @@
           "minutes": 34.4,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "27"
+          "result": "errato",
+          "id": "27",
+          "actual": 1
         },
         {
           "game": "401909336",
@@ -14116,8 +14143,9 @@
           "minutes": 30.6,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "28"
+          "result": "corretto",
+          "id": "28",
+          "actual": 12
         },
         {
           "game": "401909333",
@@ -14140,8 +14168,9 @@
           "minutes": 31.6,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "29"
+          "result": "corretto",
+          "id": "29",
+          "actual": 0
         },
         {
           "game": "401909333",
@@ -14164,8 +14193,9 @@
           "minutes": 36.8,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "30"
+          "result": "corretto",
+          "id": "30",
+          "actual": 6
         },
         {
           "game": "401909334",
@@ -14188,8 +14218,9 @@
           "minutes": 38.0,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "31"
+          "result": "corretto",
+          "id": "31",
+          "actual": 2
         },
         {
           "game": "401909326",
@@ -14212,8 +14243,9 @@
           "minutes": 25.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "32"
+          "result": "corretto",
+          "id": "32",
+          "actual": 1
         },
         {
           "game": "401909328",
@@ -14236,8 +14268,9 @@
           "minutes": 32.8,
           "matchup": 1.03,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "33"
+          "result": "errato",
+          "id": "33",
+          "actual": 4
         },
         {
           "game": "401909333",
@@ -14260,8 +14293,9 @@
           "minutes": 24.8,
           "matchup": 0.97,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "34"
+          "result": "corretto",
+          "id": "34",
+          "actual": 4
         },
         {
           "game": "401909335",
@@ -14284,8 +14318,9 @@
           "minutes": 22.0,
           "matchup": 1.03,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "35"
+          "result": "errato",
+          "id": "35",
+          "actual": 7
         },
         {
           "game": "401909334",
@@ -14308,8 +14343,9 @@
           "minutes": 28.0,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "36"
+          "result": "corretto",
+          "id": "36",
+          "actual": 8
         },
         {
           "game": "401909327",
@@ -14332,8 +14368,9 @@
           "minutes": 22.0,
           "matchup": 0.9,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "37"
+          "result": "corretto",
+          "id": "37",
+          "actual": 2
         },
         {
           "game": "401909333",
@@ -14356,8 +14393,9 @@
           "minutes": 26.4,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "38"
+          "result": "corretto",
+          "id": "38",
+          "actual": 2
         },
         {
           "game": "401909326",
@@ -14380,8 +14418,9 @@
           "minutes": 25.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "39"
+          "result": "corretto",
+          "id": "39",
+          "actual": 2
         },
         {
           "game": "401909336",
@@ -14404,8 +14443,9 @@
           "minutes": 33.0,
           "matchup": 1.0,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "40"
+          "result": "corretto",
+          "id": "40",
+          "actual": 4
         },
         {
           "game": "401909326",
@@ -14428,8 +14468,9 @@
           "minutes": 34.6,
           "matchup": 1.09,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "41"
+          "result": "corretto",
+          "id": "41",
+          "actual": 8
         },
         {
           "game": "401909331",
@@ -14452,8 +14493,9 @@
           "minutes": 24.4,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "42"
+          "result": "corretto",
+          "id": "42",
+          "actual": 2
         },
         {
           "game": "401909333",
@@ -14476,8 +14518,9 @@
           "minutes": 33.8,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "43"
+          "result": "corretto",
+          "id": "43",
+          "actual": 25
         },
         {
           "game": "401909333",
@@ -14500,8 +14543,9 @@
           "minutes": 22.0,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "44"
+          "result": "errato",
+          "id": "44",
+          "actual": 4
         },
         {
           "game": "401909336",
@@ -14524,8 +14568,9 @@
           "minutes": 22.2,
           "matchup": 0.88,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "45"
+          "result": "corretto",
+          "id": "45",
+          "actual": 2
         },
         {
           "game": "401909328",
@@ -14548,8 +14593,9 @@
           "minutes": 37.0,
           "matchup": 1.09,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "46"
+          "result": "corretto",
+          "id": "46",
+          "actual": 1
         },
         {
           "game": "401909328",
@@ -14572,8 +14618,9 @@
           "minutes": 31.0,
           "matchup": 1.0,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "47"
+          "result": "non valutabile",
+          "id": "47",
+          "actual": null
         },
         {
           "game": "401909329",
@@ -14596,8 +14643,9 @@
           "minutes": 34.2,
           "matchup": 1.06,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "48"
+          "result": "corretto",
+          "id": "48",
+          "actual": 14
         },
         {
           "game": "401909332",
@@ -14620,8 +14668,9 @@
           "minutes": 37.2,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "49"
+          "result": "corretto",
+          "id": "49",
+          "actual": 31
         },
         {
           "game": "401909332",
@@ -14644,8 +14693,9 @@
           "minutes": 24.4,
           "matchup": 0.97,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "50"
+          "result": "corretto",
+          "id": "50",
+          "actual": 2
         },
         {
           "game": "401909334",
@@ -14668,8 +14718,9 @@
           "minutes": 33.2,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "51"
+          "result": "corretto",
+          "id": "51",
+          "actual": 2
         },
         {
           "game": "401909326",
@@ -14692,8 +14743,9 @@
           "minutes": 35.0,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "52"
+          "result": "corretto",
+          "id": "52",
+          "actual": 9
         },
         {
           "game": "401909327",
@@ -14716,8 +14768,9 @@
           "minutes": 37.2,
           "matchup": 1.09,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "53"
+          "result": "corretto",
+          "id": "53",
+          "actual": 2
         },
         {
           "game": "401909336",
@@ -14740,8 +14793,9 @@
           "minutes": 33.4,
           "matchup": 1.06,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "54"
+          "result": "corretto",
+          "id": "54",
+          "actual": 7
         },
         {
           "game": "401909328",
@@ -14764,8 +14818,9 @@
           "minutes": 32.8,
           "matchup": 1.0,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "55"
+          "result": "corretto",
+          "id": "55",
+          "actual": 6
         },
         {
           "game": "401909330",
@@ -14788,8 +14843,9 @@
           "minutes": 34.8,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "56"
+          "result": "corretto",
+          "id": "56",
+          "actual": 6
         },
         {
           "game": "401909333",
@@ -14812,8 +14868,9 @@
           "minutes": 32.8,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "57"
+          "result": "errato",
+          "id": "57",
+          "actual": 26
         },
         {
           "game": "401909327",
@@ -14836,8 +14893,9 @@
           "minutes": 26.0,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "58"
+          "result": "corretto",
+          "id": "58",
+          "actual": 2
         },
         {
           "game": "401909332",
@@ -14860,8 +14918,9 @@
           "minutes": 22.0,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "59"
+          "result": "corretto",
+          "id": "59",
+          "actual": 1
         },
         {
           "game": "401909329",
@@ -14884,8 +14943,9 @@
           "minutes": 34.8,
           "matchup": 0.97,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "60"
+          "result": "corretto",
+          "id": "60",
+          "actual": 5
         },
         {
           "game": "401909334",
@@ -14908,8 +14968,9 @@
           "minutes": 28.6,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "61"
+          "result": "corretto",
+          "id": "61",
+          "actual": 0
         },
         {
           "game": "401909327",
@@ -14932,8 +14993,9 @@
           "minutes": 33.8,
           "matchup": 0.9,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "62"
+          "result": "corretto",
+          "id": "62",
+          "actual": 4
         },
         {
           "game": "401909330",
@@ -14956,8 +15018,9 @@
           "minutes": 24.6,
           "matchup": 0.94,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "63"
+          "result": "corretto",
+          "id": "63",
+          "actual": 1
         },
         {
           "game": "401909326",
@@ -14980,8 +15043,9 @@
           "minutes": 30.8,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "64"
+          "result": "corretto",
+          "id": "64",
+          "actual": 7
         },
         {
           "game": "401909332",
@@ -15004,8 +15068,9 @@
           "minutes": 29.6,
           "matchup": 0.99,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "65"
+          "result": "corretto",
+          "id": "65",
+          "actual": 12
         },
         {
           "game": "401909326",
@@ -15028,8 +15093,9 @@
           "minutes": 34.8,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "66"
+          "result": "errato",
+          "id": "66",
+          "actual": 10
         },
         {
           "game": "401909328",
@@ -15052,8 +15118,9 @@
           "minutes": 33.0,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "67"
+          "result": "corretto",
+          "id": "67",
+          "actual": 0
         },
         {
           "game": "401909331",
@@ -15076,8 +15143,9 @@
           "minutes": 23.0,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "68"
+          "result": "corretto",
+          "id": "68",
+          "actual": 4
         },
         {
           "game": "401909334",
@@ -15100,8 +15168,9 @@
           "minutes": 25.2,
           "matchup": 1.08,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "69"
+          "result": "non valutabile",
+          "id": "69",
+          "actual": null
         },
         {
           "game": "401909335",
@@ -15124,8 +15193,9 @@
           "minutes": 25.8,
           "matchup": 1.04,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "70"
+          "result": "corretto",
+          "id": "70",
+          "actual": 3
         },
         {
           "game": "401909336",
@@ -15148,8 +15218,9 @@
           "minutes": 32.2,
           "matchup": 0.88,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "71"
+          "result": "corretto",
+          "id": "71",
+          "actual": 4
         },
         {
           "game": "401909327",
@@ -15172,8 +15243,9 @@
           "minutes": 29.6,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "72"
+          "result": "corretto",
+          "id": "72",
+          "actual": 11
         },
         {
           "game": "401909327",
@@ -15196,8 +15268,9 @@
           "minutes": 24.2,
           "matchup": 1.09,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "73"
+          "result": "corretto",
+          "id": "73",
+          "actual": 8
         },
         {
           "game": "401909335",
@@ -15220,8 +15293,9 @@
           "minutes": 25.4,
           "matchup": 1.08,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "74"
+          "result": "corretto",
+          "id": "74",
+          "actual": 0
         },
         {
           "game": "401909332",
@@ -15244,8 +15318,9 @@
           "minutes": 28.6,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "75"
+          "result": "errato",
+          "id": "75",
+          "actual": 5
         },
         {
           "game": "401909331",
@@ -15268,8 +15343,9 @@
           "minutes": 28.8,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "76"
+          "result": "corretto",
+          "id": "76",
+          "actual": 3
         },
         {
           "game": "401909326",
@@ -15292,8 +15368,9 @@
           "minutes": 31.8,
           "matchup": 0.93,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "77"
+          "result": "corretto",
+          "id": "77",
+          "actual": 23
         },
         {
           "game": "401909335",
@@ -15316,8 +15393,9 @@
           "minutes": 30.8,
           "matchup": 1.08,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "78"
+          "result": "corretto",
+          "id": "78",
+          "actual": 14
         },
         {
           "game": "401909335",
@@ -15340,8 +15418,9 @@
           "minutes": 33.0,
           "matchup": 0.98,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "79"
+          "result": "corretto",
+          "id": "79",
+          "actual": 0
         },
         {
           "game": "401909332",
@@ -15364,8 +15443,9 @@
           "minutes": 31.8,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "80"
+          "result": "corretto",
+          "id": "80",
+          "actual": 7
         },
         {
           "game": "401909329",
@@ -15388,8 +15468,9 @@
           "minutes": 26.0,
           "matchup": 0.95,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "81"
+          "result": "corretto",
+          "id": "81",
+          "actual": 2
         },
         {
           "game": "401909331",
@@ -15412,8 +15493,9 @@
           "minutes": 31.4,
           "matchup": 0.98,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "82"
+          "result": "non valutabile",
+          "id": "82",
+          "actual": null
         },
         {
           "game": "401909326",
@@ -15436,8 +15518,9 @@
           "minutes": 31.4,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "83"
+          "result": "errato",
+          "id": "83",
+          "actual": 6
         },
         {
           "game": "401909327",
@@ -15460,8 +15543,9 @@
           "minutes": 34.0,
           "matchup": 1.06,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "84"
+          "result": "corretto",
+          "id": "84",
+          "actual": 6
         },
         {
           "game": "401909332",
@@ -15484,8 +15568,9 @@
           "minutes": 32.4,
           "matchup": 1.02,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "85"
+          "result": "non valutabile",
+          "id": "85",
+          "actual": null
         },
         {
           "game": "401909335",
@@ -15508,8 +15593,9 @@
           "minutes": 27.0,
           "matchup": 1.01,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "86"
+          "result": "errato",
+          "id": "86",
+          "actual": 6
         },
         {
           "game": "401909326",
@@ -15532,8 +15618,9 @@
           "minutes": 23.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "87"
+          "result": "corretto",
+          "id": "87",
+          "actual": 6
         },
         {
           "game": "401909327",
@@ -15556,8 +15643,9 @@
           "minutes": 24.8,
           "matchup": 1.04,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "88"
+          "result": "errato",
+          "id": "88",
+          "actual": 12
         },
         {
           "game": "401909330",
@@ -15580,8 +15668,9 @@
           "minutes": 30.4,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "89"
+          "result": "corretto",
+          "id": "89",
+          "actual": 3
         },
         {
           "game": "401909331",
@@ -15604,8 +15693,9 @@
           "minutes": 31.8,
           "matchup": 0.89,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "90"
+          "result": "corretto",
+          "id": "90",
+          "actual": 1
         },
         {
           "game": "401909328",
@@ -15628,8 +15718,9 @@
           "minutes": 29.4,
           "matchup": 1.07,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "91"
+          "result": "non valutabile",
+          "id": "91",
+          "actual": null
         },
         {
           "game": "401909332",
@@ -15652,8 +15743,9 @@
           "minutes": 22.2,
           "matchup": 1.05,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "92"
+          "result": "corretto",
+          "id": "92",
+          "actual": 2
         },
         {
           "game": "401909331",
@@ -15676,8 +15768,9 @@
           "minutes": 22.2,
           "matchup": 0.92,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "93"
+          "result": "errato",
+          "id": "93",
+          "actual": 2
         },
         {
           "game": "401909336",
@@ -15700,8 +15793,9 @@
           "minutes": 23.8,
           "matchup": 0.91,
           "availability": "da verificare",
-          "result": "in attesa",
-          "id": "94"
+          "result": "errato",
+          "id": "94",
+          "actual": 5
         },
         {
           "game": "401909335",
@@ -15724,8 +15818,1195 @@
           "minutes": 36.8,
           "matchup": 0.98,
           "availability": "da verificare",
+          "result": "errato",
+          "id": "95",
+          "actual": 0
+        }
+      ],
+      "combinations": [],
+      "review": "Report assenze disponibile per 0 squadre; disponibilità non garantita.",
+      "status": "Analisi completata"
+    },
+    {
+      "version": 2,
+      "day": "2026-11-28",
+      "updated": "2026-11-28T18:45:46.875940+00:00",
+      "candidates": [
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "4017837",
+          "name": "Ivica Zubac",
+          "team": "IND",
+          "opponent": "CHI",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Under",
+          "score": 96,
+          "avg": 0,
+          "avg10": 0,
+          "avg5": 0,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 14,
+          "n": 14,
+          "minutes": 26.4,
+          "matchup": 0.97,
+          "availability": "da verificare",
           "result": "in attesa",
-          "id": "95"
+          "id": "1"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4433249",
+          "name": "Moussa Diabate",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Under",
+          "score": 95,
+          "avg": 0,
+          "avg10": 0,
+          "avg5": 0,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 15,
+          "n": 15,
+          "minutes": 33.4,
+          "matchup": 1.09,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "2"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "4432639",
+          "name": "Jabari Smith Jr.",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 95,
+          "avg": 2.32,
+          "avg10": 1.7,
+          "avg5": 2,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 19,
+          "n": 19,
+          "minutes": 30.0,
+          "matchup": 0.93,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "3"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4566434",
+          "name": "Franz Wagner",
+          "team": "ORL",
+          "opponent": "WAS",
+          "metric": "Rimbalzi",
+          "line": 9.5,
+          "side": "Under",
+          "score": 94,
+          "avg": 7,
+          "avg10": 7.6,
+          "avg5": 7.6,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 16,
+          "n": 17,
+          "minutes": 36.0,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "4"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "2583632",
+          "name": "Royce O'Neale",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Under",
+          "score": 94,
+          "avg": 0.76,
+          "avg10": 1,
+          "avg5": 1,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 17,
+          "n": 17,
+          "minutes": 22.0,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "5"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "5107173",
+          "name": "Danny Wolf",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 94,
+          "avg": 2,
+          "avg10": 1.9,
+          "avg5": 2,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 13,
+          "n": 13,
+          "minutes": 23.0,
+          "matchup": 1.09,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "6"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4222252",
+          "name": "Isaiah Hartenstein",
+          "team": "OKC",
+          "opponent": "MIL",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Under",
+          "score": 94,
+          "avg": 0,
+          "avg10": 0,
+          "avg5": 0,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 19,
+          "n": 19,
+          "minutes": 27.8,
+          "matchup": 1.1,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "7"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4432848",
+          "name": "Jaime Jaquez Jr.",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 92,
+          "avg": 1.7,
+          "avg10": 1.7,
+          "avg5": 1,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 18,
+          "n": 20,
+          "minutes": 28.4,
+          "matchup": 1.15,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "8"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "4871144",
+          "name": "Alperen Sengun",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 90,
+          "avg": 1.12,
+          "avg10": 1.2,
+          "avg5": 1.4,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 15,
+          "n": 17,
+          "minutes": 28.6,
+          "matchup": 0.93,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "9"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "5160992",
+          "name": "Alex Sarr",
+          "team": "WAS",
+          "opponent": "ORL",
+          "metric": "Rimbalzi",
+          "line": 9.5,
+          "side": "Under",
+          "score": 90,
+          "avg": 6.56,
+          "avg10": 6.8,
+          "avg5": 4,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 17,
+          "n": 18,
+          "minutes": 24.6,
+          "matchup": 0.95,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "10"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4683778",
+          "name": "Jared McCain",
+          "team": "OKC",
+          "opponent": "MIL",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 89,
+          "avg": 2.21,
+          "avg10": 2.7,
+          "avg5": 2.2,
+          "hits10": 10,
+          "hits5": 5,
+          "hits": 15,
+          "n": 19,
+          "minutes": 31.2,
+          "matchup": 1.1,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "11"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4066320",
+          "name": "Desmond Bane",
+          "team": "ORL",
+          "opponent": "WAS",
+          "metric": "Punti",
+          "line": 24.5,
+          "side": "Under",
+          "score": 89,
+          "avg": 18.69,
+          "avg10": 19.4,
+          "avg5": 19.6,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 14,
+          "n": 16,
+          "minutes": 35.0,
+          "matchup": 1.03,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "12"
+        },
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "4432822",
+          "name": "Isaac Okoro",
+          "team": "CHI",
+          "opponent": "IND",
+          "metric": "Punti",
+          "line": 14.5,
+          "side": "Under",
+          "score": 89,
+          "avg": 7.94,
+          "avg10": 10.3,
+          "avg5": 10.8,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 17,
+          "n": 18,
+          "minutes": 30.8,
+          "matchup": 1.02,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "13"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4712849",
+          "name": "Anthony Black",
+          "team": "ORL",
+          "opponent": "WAS",
+          "metric": "Rimbalzi",
+          "line": 7.5,
+          "side": "Under",
+          "score": 87,
+          "avg": 5,
+          "avg10": 5.1,
+          "avg5": 4,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 12,
+          "n": 14,
+          "minutes": 34.0,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "14"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "1966",
+          "name": "LeBron James",
+          "team": "PHI",
+          "opponent": "HOU",
+          "metric": "Punti",
+          "line": 24.5,
+          "side": "Under",
+          "score": 87,
+          "avg": 17.38,
+          "avg10": 18.1,
+          "avg5": 22.4,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 15,
+          "n": 16,
+          "minutes": 31.6,
+          "matchup": 0.97,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "15"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4396971",
+          "name": "Naz Reid",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Triple",
+          "line": 1.5,
+          "side": "Over",
+          "score": 86,
+          "avg": 2.47,
+          "avg10": 2.5,
+          "avg5": 2.8,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 14,
+          "n": 17,
+          "minutes": 36.2,
+          "matchup": 1.09,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "16"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4602025",
+          "name": "Sion James",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Assist",
+          "line": 4.5,
+          "side": "Under",
+          "score": 86,
+          "avg": 3,
+          "avg10": 3,
+          "avg5": 3.2,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 14,
+          "n": 17,
+          "minutes": 30.2,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "17"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4900671",
+          "name": "Ajay Mitchell",
+          "team": "OKC",
+          "opponent": "MIL",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Over",
+          "score": 86,
+          "avg": 3.53,
+          "avg10": 3.6,
+          "avg5": 3.8,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 14,
+          "n": 17,
+          "minutes": 30.6,
+          "matchup": 1.04,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "18"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "5101761",
+          "name": "Mikel Brown Jr.",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Punti",
+          "line": 19.5,
+          "side": "Under",
+          "score": 86,
+          "avg": 12.57,
+          "avg10": 13.5,
+          "avg5": 15.4,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 13,
+          "n": 14,
+          "minutes": 25.6,
+          "matchup": 0.98,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "19"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "5105623",
+          "name": "Kel'el Ware",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Under",
+          "score": 85,
+          "avg": 1,
+          "avg10": 1.3,
+          "avg5": 1.4,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 18,
+          "n": 20,
+          "minutes": 22.6,
+          "matchup": 0.97,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "20"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "2991230",
+          "name": "Fred VanVleet",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Punti",
+          "line": 19.5,
+          "side": "Under",
+          "score": 85,
+          "avg": 13.81,
+          "avg10": 14.8,
+          "avg5": 13.4,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 14,
+          "n": 16,
+          "minutes": 30.2,
+          "matchup": 0.99,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "21"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4277905",
+          "name": "Trae Young",
+          "team": "WAS",
+          "opponent": "ORL",
+          "metric": "Punti",
+          "line": 9.5,
+          "side": "Over",
+          "score": 85,
+          "avg": 17.05,
+          "avg10": 14.4,
+          "avg5": 13.6,
+          "hits10": 8,
+          "hits5": 5,
+          "hits": 17,
+          "n": 19,
+          "minutes": 32.6,
+          "matchup": 0.99,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "22"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "6583",
+          "name": "Anthony Davis",
+          "team": "WAS",
+          "opponent": "ORL",
+          "metric": "Punti",
+          "line": 19.5,
+          "side": "Over",
+          "score": 84,
+          "avg": 25.59,
+          "avg10": 27.4,
+          "avg5": 27.8,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 13,
+          "n": 17,
+          "minutes": 34.6,
+          "matchup": 0.99,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "23"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "4433192",
+          "name": "Tari Eason",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Rimbalzi",
+          "line": 7.5,
+          "side": "Under",
+          "score": 84,
+          "avg": 5.74,
+          "avg10": 5.6,
+          "avg5": 4.6,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 15,
+          "n": 19,
+          "minutes": 22.4,
+          "matchup": 1.04,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "24"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "3064514",
+          "name": "Julius Randle",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Rimbalzi",
+          "line": 3.5,
+          "side": "Over",
+          "score": 84,
+          "avg": 6.06,
+          "avg10": 5.2,
+          "avg5": 5.4,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 16,
+          "n": 18,
+          "minutes": 34.2,
+          "matchup": 0.91,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "25"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "5124612",
+          "name": "VJ Edgecombe",
+          "team": "PHI",
+          "opponent": "HOU",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 84,
+          "avg": 1.58,
+          "avg10": 1.4,
+          "avg5": 1.8,
+          "hits10": 8,
+          "hits5": 5,
+          "hits": 16,
+          "n": 19,
+          "minutes": 36.8,
+          "matchup": 0.91,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "26"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "3202",
+          "name": "Kevin Durant",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Punti",
+          "line": 19.5,
+          "side": "Over",
+          "score": 82,
+          "avg": 21.53,
+          "avg10": 22.2,
+          "avg5": 22.2,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 15,
+          "n": 19,
+          "minutes": 32.4,
+          "matchup": 0.99,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "27"
+        },
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "4871145",
+          "name": "Josh Giddey",
+          "team": "CHI",
+          "opponent": "IND",
+          "metric": "Assist",
+          "line": 6.5,
+          "side": "Over",
+          "score": 81,
+          "avg": 9.22,
+          "avg10": 10.5,
+          "avg5": 11.2,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 13,
+          "n": 18,
+          "minutes": 29.6,
+          "matchup": 1.01,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "28"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "3134907",
+          "name": "Kyle Kuzma",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Rimbalzi",
+          "line": 5.5,
+          "side": "Under",
+          "score": 81,
+          "avg": 5,
+          "avg10": 4.1,
+          "avg5": 4.2,
+          "hits10": 9,
+          "hits5": 5,
+          "hits": 13,
+          "n": 19,
+          "minutes": 31.2,
+          "matchup": 1.03,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "29"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4395725",
+          "name": "Tyler Herro",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Over",
+          "score": 81,
+          "avg": 4.53,
+          "avg10": 4.5,
+          "avg5": 5.4,
+          "hits10": 8,
+          "hits5": 5,
+          "hits": 15,
+          "n": 19,
+          "minutes": 36.0,
+          "matchup": 0.97,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "30"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "5174563",
+          "name": "Kyshawn George",
+          "team": "WAS",
+          "opponent": "ORL",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Over",
+          "score": 80,
+          "avg": 4.37,
+          "avg10": 3.7,
+          "avg5": 3.4,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 16,
+          "n": 19,
+          "minutes": 37.4,
+          "matchup": 1.03,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "31"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "5175643",
+          "name": "Egor Demin",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Rimbalzi",
+          "line": 3.5,
+          "side": "Under",
+          "score": 79,
+          "avg": 2.33,
+          "avg10": 2,
+          "avg5": 2.8,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 9,
+          "n": 12,
+          "minutes": 23.8,
+          "matchup": 0.91,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "32"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4433287",
+          "name": "Brandon Miller",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Assist",
+          "line": 4.5,
+          "side": "Under",
+          "score": 79,
+          "avg": 2.6,
+          "avg10": 3,
+          "avg5": 3.4,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 13,
+          "n": 15,
+          "minutes": 31.6,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "33"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4432194",
+          "name": "Day'Ron Sharpe",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Assist",
+          "line": 6.5,
+          "side": "Under",
+          "score": 79,
+          "avg": 4,
+          "avg10": 5.1,
+          "avg5": 3.4,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 15,
+          "n": 18,
+          "minutes": 25.0,
+          "matchup": 0.97,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "34"
+        },
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "3149673",
+          "name": "Pascal Siakam",
+          "team": "IND",
+          "opponent": "CHI",
+          "metric": "Punti",
+          "line": 19.5,
+          "side": "Over",
+          "score": 79,
+          "avg": 22.28,
+          "avg10": 23.1,
+          "avg5": 20.2,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 14,
+          "n": 18,
+          "minutes": 31.2,
+          "matchup": 1.08,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "35"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "4431678",
+          "name": "Tyrese Maxey",
+          "team": "PHI",
+          "opponent": "HOU",
+          "metric": "Triple",
+          "line": 3.5,
+          "side": "Under",
+          "score": 79,
+          "avg": 2.42,
+          "avg10": 2.3,
+          "avg5": 1.8,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 15,
+          "n": 19,
+          "minutes": 34.4,
+          "matchup": 0.91,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "36"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "2581018",
+          "name": "Kentavious Caldwell-Pope",
+          "team": "PHI",
+          "opponent": "HOU",
+          "metric": "Triple",
+          "line": 2.5,
+          "side": "Under",
+          "score": 79,
+          "avg": 1.4,
+          "avg10": 1.5,
+          "avg5": 1.6,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 17,
+          "n": 20,
+          "minutes": 26.6,
+          "matchup": 0.91,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "37"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4278073",
+          "name": "Shai Gilgeous-Alexander",
+          "team": "OKC",
+          "opponent": "MIL",
+          "metric": "Punti",
+          "line": 29.5,
+          "side": "Over",
+          "score": 78,
+          "avg": 32.06,
+          "avg10": 33.6,
+          "avg5": 36.2,
+          "hits10": 8,
+          "hits5": 5,
+          "hits": 12,
+          "n": 18,
+          "minutes": 35.6,
+          "matchup": 1.06,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "38"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4702382",
+          "name": "Tristan da Silva",
+          "team": "ORL",
+          "opponent": "WAS",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Under",
+          "score": 78,
+          "avg": 1.53,
+          "avg10": 1.6,
+          "avg5": 1.2,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 12,
+          "n": 15,
+          "minutes": 28.4,
+          "matchup": 1.1,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "39"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "3133626",
+          "name": "Kenrich Williams",
+          "team": "OKC",
+          "opponent": "MIL",
+          "metric": "Assist",
+          "line": 2.5,
+          "side": "Under",
+          "score": 78,
+          "avg": 1.58,
+          "avg10": 2,
+          "avg5": 2,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 15,
+          "n": 19,
+          "minutes": 25.6,
+          "matchup": 1.04,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "40"
+        },
+        {
+          "game": "401910050",
+          "start": "2026-11-29T01:30Z",
+          "player": "4684740",
+          "name": "Amen Thompson",
+          "team": "HOU",
+          "opponent": "PHI",
+          "metric": "Rimbalzi",
+          "line": 5.5,
+          "side": "Over",
+          "score": 77,
+          "avg": 7,
+          "avg10": 7.7,
+          "avg5": 7.2,
+          "hits10": 9,
+          "hits5": 4,
+          "hits": 12,
+          "n": 18,
+          "minutes": 30.0,
+          "matchup": 1.04,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "41"
+        },
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "4395712",
+          "name": "Andrew Nembhard",
+          "team": "IND",
+          "opponent": "CHI",
+          "metric": "Assist",
+          "line": 8.5,
+          "side": "Under",
+          "score": 77,
+          "avg": 7.27,
+          "avg10": 6.9,
+          "avg5": 6.2,
+          "hits10": 8,
+          "hits5": 5,
+          "hits": 10,
+          "n": 15,
+          "minutes": 31.2,
+          "matchup": 1.07,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "42"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4395651",
+          "name": "Coby White",
+          "team": "CHA",
+          "opponent": "BKN",
+          "metric": "Punti",
+          "line": 9.5,
+          "side": "Over",
+          "score": 76,
+          "avg": 13.2,
+          "avg10": 13.2,
+          "avg5": 16.6,
+          "hits10": 7,
+          "hits5": 5,
+          "hits": 7,
+          "n": 10,
+          "minutes": 25.0,
+          "matchup": 1.05,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "43"
+        },
+        {
+          "game": "401910047",
+          "start": "2026-11-28T23:00Z",
+          "player": "4712896",
+          "name": "Noah Clowney",
+          "team": "BKN",
+          "opponent": "CHA",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 75,
+          "avg": 1.11,
+          "avg10": 1.5,
+          "avg5": 1.6,
+          "hits10": 8,
+          "hits5": 4,
+          "hits": 13,
+          "n": 18,
+          "minutes": 23.0,
+          "matchup": 1.09,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "44"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "5104155",
+          "name": "Bilal Coulibaly",
+          "team": "WAS",
+          "opponent": "ORL",
+          "metric": "Rimbalzi",
+          "line": 5.5,
+          "side": "Under",
+          "score": 75,
+          "avg": 4.22,
+          "avg10": 4.9,
+          "avg5": 4.8,
+          "hits10": 7,
+          "hits5": 4,
+          "hits": 14,
+          "n": 18,
+          "minutes": 22.6,
+          "matchup": 0.95,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "45"
+        },
+        {
+          "game": "401910048",
+          "start": "2026-11-29T01:00Z",
+          "player": "4711294",
+          "name": "Matas Buzelis",
+          "team": "CHI",
+          "opponent": "IND",
+          "metric": "Rimbalzi",
+          "line": 5.5,
+          "side": "Under",
+          "score": 75,
+          "avg": 4.83,
+          "avg10": 5.2,
+          "avg5": 5.2,
+          "hits10": 7,
+          "hits5": 4,
+          "hits": 14,
+          "n": 18,
+          "minutes": 30.8,
+          "matchup": 1.06,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "46"
+        },
+        {
+          "game": "401910046",
+          "start": "2026-11-28T22:00Z",
+          "player": "4277847",
+          "name": "Wendell Carter Jr.",
+          "team": "ORL",
+          "opponent": "WAS",
+          "metric": "Triple",
+          "line": 1.5,
+          "side": "Under",
+          "score": 74,
+          "avg": 1,
+          "avg10": 1.1,
+          "avg5": 1,
+          "hits10": 7,
+          "hits5": 4,
+          "hits": 13,
+          "n": 17,
+          "minutes": 31.8,
+          "matchup": 0.97,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "47"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "3133628",
+          "name": "Myles Turner",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Triple",
+          "line": 0.5,
+          "side": "Over",
+          "score": 72,
+          "avg": 1.44,
+          "avg10": 1.4,
+          "avg5": 1.6,
+          "hits10": 7,
+          "hits5": 4,
+          "hits": 12,
+          "n": 18,
+          "minutes": 26.0,
+          "matchup": 1.15,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "48"
+        },
+        {
+          "game": "401910049",
+          "start": "2026-11-29T01:00Z",
+          "player": "4591725",
+          "name": "Ryan Rollins",
+          "team": "MIL",
+          "opponent": "OKC",
+          "metric": "Rimbalzi",
+          "line": 5.5,
+          "side": "Under",
+          "score": 70,
+          "avg": 4.61,
+          "avg10": 4.5,
+          "avg5": 3.4,
+          "hits10": 7,
+          "hits5": 4,
+          "hits": 12,
+          "n": 18,
+          "minutes": 24.0,
+          "matchup": 1.03,
+          "availability": "da verificare",
+          "result": "in attesa",
+          "id": "49"
         }
       ],
       "combinations": [],
